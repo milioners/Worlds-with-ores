@@ -1,18 +1,25 @@
 package net.millioners.worldswithores.client;
 
+import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.joml.Quaternionf;
 
 import java.util.List;
 
 public class RecipeBookScreen extends Screen {
-    private static final int PANEL_W = 320;
-    private static final int PANEL_H = 220;
+    private static final int PANEL_W = 340;
+    private static final int PANEL_H = 230;
     private static final int TAB_W = 88;
 
     private ModRecipePages.Category category = ModRecipePages.Category.GUIDE;
@@ -42,7 +49,7 @@ public class RecipeBookScreen extends Screen {
         }
 
         int navY = this.top + PANEL_H - 28;
-        int navX = this.left + TAB_W + 24;
+        int navX = this.left + TAB_W + 28;
         this.addRenderableWidget(Button.builder(Component.literal("<"), b -> {
             List<ModRecipePages.Page> pages = ModRecipePages.pagesFor(this.category);
             if (!pages.isEmpty()) {
@@ -55,7 +62,7 @@ public class RecipeBookScreen extends Screen {
             if (!pages.isEmpty()) {
                 this.pageIndex = (this.pageIndex + 1) % pages.size();
             }
-        }).bounds(navX + 120, navY, 20, 20).build());
+        }).bounds(navX + 130, navY, 20, 20).build());
 
         this.addRenderableWidget(Button.builder(Component.translatable("gui.done"), b -> this.onClose())
                 .bounds(this.left + PANEL_W - 58, this.top + 6, 50, 16).build());
@@ -81,17 +88,121 @@ public class RecipeBookScreen extends Screen {
         switch (page.kind()) {
             case SMELTING -> renderSmelting(graphics, page, contentX, mouseX, mouseY);
             case INFO -> renderInfo(graphics, page, contentX, mouseX, mouseY);
+            case PORTAL -> renderPortal(graphics, page, contentX, mouseX, mouseY);
             default -> renderCrafting(graphics, page, contentX, mouseX, mouseY);
         }
 
         if (!page.hint().getString().isEmpty() && page.kind() != ModRecipePages.Kind.INFO) {
-            drawWrapped(graphics, page.hint(), contentX, this.top + 150, PANEL_W - TAB_W - 40, 0xFFC8B8A0);
+            int hintY = page.kind() == ModRecipePages.Kind.PORTAL ? this.top + 168 : this.top + 155;
+            drawWrapped(graphics, page.hint(), contentX, hintY, PANEL_W - TAB_W - 40, 0xFFC8B8A0);
         }
 
         String footer = (this.pageIndex + 1) + " / " + pages.size();
-        graphics.drawCenteredString(this.font, footer, this.left + TAB_W + 90, this.top + PANEL_H - 22, 0xFFC8B8A0);
+        graphics.drawCenteredString(this.font, footer, this.left + TAB_W + 100, this.top + PANEL_H - 22, 0xFFC8B8A0);
 
         super.render(graphics, mouseX, mouseY, partialTick);
+    }
+
+    private void renderPortal(GuiGraphics graphics, ModRecipePages.Page page, int contentX, int mouseX, int mouseY) {
+        int previewX = contentX + 55;
+        int previewY = this.top + 115;
+        renderPortalStructure(graphics, page.frameBlock(), page.portalBlock(), previewX, previewY);
+
+        int rx = contentX + 145;
+        int ry = this.top + 70;
+        graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.book.portal.need_igniter"),
+                rx, ry - 14, 0xFFC8B8A0, false);
+        drawSlot(graphics, rx, ry, 26);
+        if (!page.result().isEmpty()) {
+            graphics.renderItem(page.result(), rx + 5, ry + 5);
+            graphics.renderItemDecorations(this.font, page.result(), rx + 5, ry + 5);
+        }
+        if (!page.frameBlock().isEmpty()) {
+            graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.book.portal.frame_block"),
+                    contentX, this.top + 48, 0xFFC8B8A0, false);
+            drawSlot(graphics, contentX, this.top + 60, 22);
+            graphics.renderItem(page.frameBlock(), contentX + 3, this.top + 63);
+            if (mouseX >= contentX && mouseX < contentX + 22 && mouseY >= this.top + 60 && mouseY < this.top + 82) {
+                graphics.renderTooltip(this.font, page.frameBlock(), mouseX, mouseY);
+            }
+        }
+        if (!page.result().isEmpty() && mouseX >= rx && mouseX < rx + 26 && mouseY >= ry && mouseY < ry + 26) {
+            graphics.renderTooltip(this.font, page.result(), mouseX, mouseY);
+        }
+    }
+
+    /**
+     * Draws a classic 4x5 portal frame using 3D block item models (isometric).
+     */
+    private void renderPortalStructure(GuiGraphics graphics, ItemStack frame, ItemStack portal, int centerX, int centerY) {
+        if (frame.isEmpty()) {
+            return;
+        }
+        // rows from top(0) to bottom(4), cols 0..3; interior cols 1-2, rows 1-3
+        boolean[][] solid = {
+                {true, true, true, true},
+                {true, false, false, true},
+                {true, false, false, true},
+                {true, false, false, true},
+                {true, true, true, true}
+        };
+
+        float scale = 14.0F;
+        float stepX = 11.0F;
+        float stepY = 10.0F;
+        float startX = centerX - 1.5F * stepX;
+        float startY = centerY - 2.2F * stepY;
+
+        // Draw back-to-front for depth
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 4; col++) {
+                float x = startX + col * stepX;
+                float y = startY + row * stepY;
+                float z = 100.0F + row * 2.0F + col;
+                ItemStack stack = solid[row][col] ? frame : portal;
+                if (stack.isEmpty() && !solid[row][col]) {
+                    // fallback purple plate
+                    graphics.fill((int) x, (int) y, (int) x + 12, (int) y + 14, 0xAA7A3CFF);
+                    continue;
+                }
+                if (stack.isEmpty()) {
+                    continue;
+                }
+                renderBlockItem3D(graphics, stack, x, y, z, scale, !solid[row][col]);
+            }
+        }
+    }
+
+    private void renderBlockItem3D(GuiGraphics graphics, ItemStack stack, float x, float y, float z, float scale, boolean portalPane) {
+        PoseStack pose = graphics.pose();
+        pose.pushPose();
+        pose.translate(x + 8.0F, y + 8.0F, z);
+        pose.scale(scale, -scale, scale);
+        pose.mulPose(new Quaternionf().rotationXYZ(
+                (float) Math.toRadians(30.0F),
+                (float) Math.toRadians(225.0F),
+                0.0F
+        ));
+        if (portalPane) {
+            pose.scale(0.55F, 1.05F, 0.12F);
+        }
+
+        Lighting.setupForFlatItems();
+        RenderSystem.assertOnRenderThread();
+        var buffers = this.minecraft.renderBuffers().bufferSource();
+        this.minecraft.getItemRenderer().renderStatic(
+                stack,
+                ItemDisplayContext.GUI,
+                LightTexture.FULL_BRIGHT,
+                OverlayTexture.NO_OVERLAY,
+                pose,
+                buffers,
+                this.minecraft.level,
+                0
+        );
+        buffers.endBatch();
+        Lighting.setupFor3DItems();
+        pose.popPose();
     }
 
     private void renderCrafting(GuiGraphics graphics, ModRecipePages.Page page, int contentX, int mouseX, int mouseY) {
