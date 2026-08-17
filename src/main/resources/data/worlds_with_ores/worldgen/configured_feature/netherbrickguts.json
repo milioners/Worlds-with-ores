@@ -1,7 +1,7 @@
 {
   "type": "minecraft:ore",
   "config": {
-    "size": 16,
+    "size": 20,
     "discard_chance_on_air_exposure": 0.0,
     "targets": [
       {
@@ -89,6 +89,60 @@
         "target": {
           "predicate_type": "minecraft:block_match",
           "block": "minecraft:netherrack"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbrickguts"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "worlds_with_ores:ind_ore_zinc"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbrickguts"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "worlds_with_ores:ind_ore_osmium"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbrickguts"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "worlds_with_ores:ind_ore_aluminum"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbrickguts"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "worlds_with_ores:ind_ore_silver"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbrickguts"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "worlds_with_ores:ind_ore_yellorium"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbrickguts"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "worlds_with_ores:ind_ore_certus"
         },
         "state": {
           "Name": "worlds_with_ores:netherbrickguts"
