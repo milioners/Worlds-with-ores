@@ -25,8 +25,10 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.millioners.worldswithores.util.SoftFrames;
 import net.millioners.worldswithores.world.ModTeleporter;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModPortalBlock extends Block {
@@ -34,10 +36,14 @@ public class ModPortalBlock extends Block {
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
 
-    private final Supplier<Block> frameBlock;
+    private final List<Supplier<Block>> frameBlocks;
     private final ResourceKey<Level> destination;
 
     public ModPortalBlock(Supplier<Block> frameBlock, ResourceKey<Level> destination) {
+        this(List.of(frameBlock), destination);
+    }
+
+    public ModPortalBlock(List<Supplier<Block>> frameBlocks, ResourceKey<Level> destination) {
         super(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.COLOR_BLACK)
                 .noCollission()
@@ -47,13 +53,23 @@ public class ModPortalBlock extends Block {
                 .lightLevel(state -> 11)
                 .noLootTable()
                 .pushReaction(PushReaction.BLOCK));
-        this.frameBlock = frameBlock;
+        this.frameBlocks = frameBlocks;
         this.destination = destination;
         this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X));
     }
 
     public Block getFrameBlock() {
-        return this.frameBlock.get();
+        List<Block> frames = SoftFrames.resolveAll(this.frameBlocks);
+        return frames.isEmpty() ? Blocks.AIR : frames.get(0);
+    }
+
+    public boolean isFrame(BlockState state) {
+        for (Block frame : SoftFrames.resolveAll(this.frameBlocks)) {
+            if (state.is(frame)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public ResourceKey<Level> getDestination() {
@@ -106,20 +122,19 @@ public class ModPortalBlock extends Block {
             return false;
         }
 
-        Block frame = this.getFrameBlock();
         for (int x = 0; x < width; x++) {
-            if (!level.getBlockState(bottom.relative(right, x).below()).is(frame)) {
+            if (!this.isFrame(level.getBlockState(bottom.relative(right, x).below()))) {
                 return false;
             }
-            if (!level.getBlockState(bottom.relative(right, x).above(height)).is(frame)) {
+            if (!this.isFrame(level.getBlockState(bottom.relative(right, x).above(height)))) {
                 return false;
             }
         }
         for (int y = 0; y < height; y++) {
-            if (!level.getBlockState(bottom.relative(left).above(y)).is(frame)) {
+            if (!this.isFrame(level.getBlockState(bottom.relative(left).above(y)))) {
                 return false;
             }
-            if (!level.getBlockState(bottom.relative(right, width).above(y)).is(frame)) {
+            if (!this.isFrame(level.getBlockState(bottom.relative(right, width).above(y)))) {
                 return false;
             }
         }
@@ -190,6 +205,15 @@ public class ModPortalBlock extends Block {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(AXIS, context.getHorizontalDirection().getAxis());
+    }
+
+    public static boolean trySpawnPortal(Level level, BlockPos pos, List<Block> frames, ModPortalBlock portal) {
+        for (Block frame : frames) {
+            if (frame != null && frame != Blocks.AIR && trySpawnPortal(level, pos, frame, portal)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean trySpawnPortal(Level level, BlockPos pos, Block frame, ModPortalBlock portal) {

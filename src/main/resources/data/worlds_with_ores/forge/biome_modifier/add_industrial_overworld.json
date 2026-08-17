@@ -50,7 +50,13 @@
     "worlds_with_ores:compat_bigreactors_benitoite_ore",
     "worlds_with_ores:compat_ae2_quartz_cluster",
     "worlds_with_ores:compat_ae2_flawed_budding_quartz",
-    "worlds_with_ores:compat_ae2_damaged_budding_quartz"
+    "worlds_with_ores:compat_ae2_damaged_budding_quartz",
+    "worlds_with_ores:ind_ore_zinc_gen",
+    "worlds_with_ores:ind_ore_osmium_gen",
+    "worlds_with_ores:ind_ore_aluminum_gen",
+    "worlds_with_ores:ind_ore_silver_gen",
+    "worlds_with_ores:ind_ore_yellorium_gen",
+    "worlds_with_ores:ind_ore_certus_gen"
   ],
   "step": "underground_ores"
 }

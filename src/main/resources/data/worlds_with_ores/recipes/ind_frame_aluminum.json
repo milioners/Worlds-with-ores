@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "worlds_with_ores:ind_ingot_aluminum"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:ind_frame_aluminum"
+  }
+}

@@ -17,13 +17,23 @@ public class ClientSetup {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenus.CHEST.get(), ModChestScreen::new);
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.COALWORD_PORTAL.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.IRONWORLD_PORTAL.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.GOLDWORLD_PORTAL.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.DIAMONDWORLD_PORTAL.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.EMERALDWORLD_PORTAL.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LAPISWORLD_PORTAL.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.REDSTONEWORLD_PORTAL.get(), RenderType.translucent());
+            setPortalLayer(ModBlocks.COALWORD_PORTAL.get());
+            setPortalLayer(ModBlocks.IRONWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.GOLDWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.DIAMONDWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.EMERALDWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.LAPISWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.REDSTONEWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.ZINCWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.OSMIUMWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.ALUMINUMWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.SILVERWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.YELLORIUMWORLD_PORTAL.get());
+            setPortalLayer(ModBlocks.CERTUSWORLD_PORTAL.get());
         });
+    }
+
+    private static void setPortalLayer(net.minecraft.world.level.block.Block portal) {
+        ItemBlockRenderTypes.setRenderLayer(portal, RenderType.translucent());
     }
 }

@@ -14,6 +14,7 @@ import net.millioners.worldswithores.item.ModArmorMaterials;
 import net.millioners.worldswithores.item.ModTiers;
 import net.millioners.worldswithores.item.PortalIgniterItem;
 import net.millioners.worldswithores.item.RecipesBookItem;
+import net.millioners.worldswithores.util.SoftFrames;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -72,6 +73,68 @@ public class ModItems {
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64), () -> Blocks.LAPIS_BLOCK, ModBlocks.LAPISWORLD_PORTAL));
     public static final RegistryObject<Item> REDSTONEWORLD = ITEMS.register("redstoneworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64), () -> Blocks.REDSTONE_BLOCK, ModBlocks.REDSTONEWORLD_PORTAL));
+
+    public static final RegistryObject<Item> IND_ORE_ZINC = blockItem("ind_ore_zinc", ModBlocks.IND_ORE_ZINC);
+    public static final RegistryObject<Item> IND_ORE_OSMIUM = blockItem("ind_ore_osmium", ModBlocks.IND_ORE_OSMIUM);
+    public static final RegistryObject<Item> IND_ORE_ALUMINUM = blockItem("ind_ore_aluminum", ModBlocks.IND_ORE_ALUMINUM);
+    public static final RegistryObject<Item> IND_ORE_SILVER = blockItem("ind_ore_silver", ModBlocks.IND_ORE_SILVER);
+    public static final RegistryObject<Item> IND_ORE_YELLORIUM = blockItem("ind_ore_yellorium", ModBlocks.IND_ORE_YELLORIUM);
+    public static final RegistryObject<Item> IND_ORE_CERTUS = blockItem("ind_ore_certus", ModBlocks.IND_ORE_CERTUS);
+
+    public static final RegistryObject<Item> IND_FRAME_ZINC = blockItem("ind_frame_zinc", ModBlocks.IND_FRAME_ZINC);
+    public static final RegistryObject<Item> IND_FRAME_OSMIUM = blockItem("ind_frame_osmium", ModBlocks.IND_FRAME_OSMIUM);
+    public static final RegistryObject<Item> IND_FRAME_ALUMINUM = blockItem("ind_frame_aluminum", ModBlocks.IND_FRAME_ALUMINUM);
+    public static final RegistryObject<Item> IND_FRAME_SILVER = blockItem("ind_frame_silver", ModBlocks.IND_FRAME_SILVER);
+    public static final RegistryObject<Item> IND_FRAME_YELLORIUM = blockItem("ind_frame_yellorium", ModBlocks.IND_FRAME_YELLORIUM);
+    public static final RegistryObject<Item> IND_FRAME_CERTUS = blockItem("ind_frame_certus", ModBlocks.IND_FRAME_CERTUS);
+
+    public static final RegistryObject<Item> IND_RAW_ZINC = ITEMS.register("ind_raw_zinc", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_RAW_OSMIUM = ITEMS.register("ind_raw_osmium", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_RAW_ALUMINUM = ITEMS.register("ind_raw_aluminum", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_RAW_SILVER = ITEMS.register("ind_raw_silver", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_RAW_YELLORIUM = ITEMS.register("ind_raw_yellorium", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_RAW_CERTUS = ITEMS.register("ind_raw_certus", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> IND_INGOT_ZINC = ITEMS.register("ind_ingot_zinc", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_INGOT_OSMIUM = ITEMS.register("ind_ingot_osmium", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_INGOT_ALUMINUM = ITEMS.register("ind_ingot_aluminum", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_INGOT_SILVER = ITEMS.register("ind_ingot_silver", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_INGOT_YELLORIUM = ITEMS.register("ind_ingot_yellorium", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IND_INGOT_CERTUS = ITEMS.register("ind_ingot_certus", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> ZINCWORLD = ITEMS.register("zincworld",
+            () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
+                    SoftFrames.pair("create:zinc_block", ModBlocks.IND_FRAME_ZINC), ModBlocks.ZINCWORLD_PORTAL));
+    public static final RegistryObject<Item> OSMIUMWORLD = ITEMS.register("osmiumworld",
+            () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
+                    SoftFrames.pair("mekanism:block_osmium", ModBlocks.IND_FRAME_OSMIUM), ModBlocks.OSMIUMWORLD_PORTAL));
+    public static final RegistryObject<Item> ALUMINUMWORLD = ITEMS.register("aluminumworld",
+            () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
+                    SoftFrames.pair("immersiveengineering:storage_aluminum", ModBlocks.IND_FRAME_ALUMINUM), ModBlocks.ALUMINUMWORLD_PORTAL));
+    public static final RegistryObject<Item> SILVERWORLD = ITEMS.register("silverworld",
+            () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
+                    SoftFrames.pair("thermal:silver_block", ModBlocks.IND_FRAME_SILVER), ModBlocks.SILVERWORLD_PORTAL));
+    public static final RegistryObject<Item> YELLORIUMWORLD = ITEMS.register("yelloriumworld",
+            () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
+                    SoftFrames.pair("bigreactors:yellorium_block", ModBlocks.IND_FRAME_YELLORIUM), ModBlocks.YELLORIUMWORLD_PORTAL));
+    public static final RegistryObject<Item> CERTUSWORLD = ITEMS.register("certusworld",
+            () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
+                    SoftFrames.pair("ae2:quartz_block", ModBlocks.IND_FRAME_CERTUS), ModBlocks.CERTUSWORLD_PORTAL));
+
+    // Display-only 3D portal models for the recipe book
+    public static final RegistryObject<Item> PORTAL_PREVIEW_COAL = ITEMS.register("portal_preview_coal", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_IRON = ITEMS.register("portal_preview_iron", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_GOLD = ITEMS.register("portal_preview_gold", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_DIAMOND = ITEMS.register("portal_preview_diamond", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_EMERALD = ITEMS.register("portal_preview_emerald", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_LAPIS = ITEMS.register("portal_preview_lapis", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_REDSTONE = ITEMS.register("portal_preview_redstone", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_ZINC = ITEMS.register("portal_preview_zinc", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_OSMIUM = ITEMS.register("portal_preview_osmium", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_ALUMINUM = ITEMS.register("portal_preview_aluminum", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_SILVER = ITEMS.register("portal_preview_silver", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_YELLORIUM = ITEMS.register("portal_preview_yellorium", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_PREVIEW_CERTUS = ITEMS.register("portal_preview_certus", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> LAVA_OBSIDIAN_SWORD = ITEMS.register("lava_obsidian_sword",
             () -> new SwordItem(ModTiers.LAVA_OBSIDIAN, 3, -2.0F, new Item.Properties().fireResistant()));

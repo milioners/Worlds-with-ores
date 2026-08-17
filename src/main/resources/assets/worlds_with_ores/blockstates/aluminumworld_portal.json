@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "worlds_with_ores:block/aluminumworld_portal_ns"
+    },
+    "axis=z": {
+      "model": "worlds_with_ores:block/aluminumworld_portal_ew"
+    }
+  }
+}

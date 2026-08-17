@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "worlds_with_ores:block/osmiumworld_portal_ns"
+    },
+    "axis=z": {
+      "model": "worlds_with_ores:block/osmiumworld_portal_ew"
+    }
+  }
+}

@@ -11,6 +11,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.millioners.worldswithores.WorldsWithOresMod;
 import net.millioners.worldswithores.block.ModChestBlock;
 import net.millioners.worldswithores.block.ModPortalBlock;
+import net.millioners.worldswithores.util.SoftFrames;
 import net.millioners.worldswithores.world.ModDimensions;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -84,4 +85,44 @@ public class ModBlocks {
             () -> new ModPortalBlock(() -> Blocks.LAPIS_BLOCK, ModDimensions.LAPISWORLD));
     public static final RegistryObject<ModPortalBlock> REDSTONEWORLD_PORTAL = BLOCKS.register("redstoneworld_portal",
             () -> new ModPortalBlock(() -> Blocks.REDSTONE_BLOCK, ModDimensions.REDSTONEWORLD));
+
+    // Soft industrial terrain + frames (always present; prefer mod frames when installed)
+    public static final RegistryObject<Block> IND_ORE_ZINC =
+            BLOCKS.register("ind_ore_zinc", () -> new DropExperienceBlock(oreProps(), UniformInt.of(1, 3)));
+    public static final RegistryObject<Block> IND_ORE_OSMIUM =
+            BLOCKS.register("ind_ore_osmium", () -> new DropExperienceBlock(oreProps(), UniformInt.of(1, 3)));
+    public static final RegistryObject<Block> IND_ORE_ALUMINUM =
+            BLOCKS.register("ind_ore_aluminum", () -> new DropExperienceBlock(oreProps(), UniformInt.of(1, 3)));
+    public static final RegistryObject<Block> IND_ORE_SILVER =
+            BLOCKS.register("ind_ore_silver", () -> new DropExperienceBlock(oreProps(), UniformInt.of(1, 3)));
+    public static final RegistryObject<Block> IND_ORE_YELLORIUM =
+            BLOCKS.register("ind_ore_yellorium", () -> new DropExperienceBlock(oreProps(), UniformInt.of(2, 5)));
+    public static final RegistryObject<Block> IND_ORE_CERTUS =
+            BLOCKS.register("ind_ore_certus", () -> new DropExperienceBlock(oreProps(), UniformInt.of(1, 4)));
+
+    public static final RegistryObject<Block> IND_FRAME_ZINC =
+            BLOCKS.register("ind_frame_zinc", () -> new Block(stoneLike()));
+    public static final RegistryObject<Block> IND_FRAME_OSMIUM =
+            BLOCKS.register("ind_frame_osmium", () -> new Block(stoneLike()));
+    public static final RegistryObject<Block> IND_FRAME_ALUMINUM =
+            BLOCKS.register("ind_frame_aluminum", () -> new Block(stoneLike()));
+    public static final RegistryObject<Block> IND_FRAME_SILVER =
+            BLOCKS.register("ind_frame_silver", () -> new Block(stoneLike()));
+    public static final RegistryObject<Block> IND_FRAME_YELLORIUM =
+            BLOCKS.register("ind_frame_yellorium", () -> new Block(stoneLike()));
+    public static final RegistryObject<Block> IND_FRAME_CERTUS =
+            BLOCKS.register("ind_frame_certus", () -> new Block(stoneLike()));
+
+    public static final RegistryObject<ModPortalBlock> ZINCWORLD_PORTAL = BLOCKS.register("zincworld_portal",
+            () -> new ModPortalBlock(SoftFrames.pair("create:zinc_block", IND_FRAME_ZINC), ModDimensions.ZINCWORLD));
+    public static final RegistryObject<ModPortalBlock> OSMIUMWORLD_PORTAL = BLOCKS.register("osmiumworld_portal",
+            () -> new ModPortalBlock(SoftFrames.pair("mekanism:block_osmium", IND_FRAME_OSMIUM), ModDimensions.OSMIUMWORLD));
+    public static final RegistryObject<ModPortalBlock> ALUMINUMWORLD_PORTAL = BLOCKS.register("aluminumworld_portal",
+            () -> new ModPortalBlock(SoftFrames.pair("immersiveengineering:storage_aluminum", IND_FRAME_ALUMINUM), ModDimensions.ALUMINUMWORLD));
+    public static final RegistryObject<ModPortalBlock> SILVERWORLD_PORTAL = BLOCKS.register("silverworld_portal",
+            () -> new ModPortalBlock(SoftFrames.pair("thermal:silver_block", IND_FRAME_SILVER), ModDimensions.SILVERWORLD));
+    public static final RegistryObject<ModPortalBlock> YELLORIUMWORLD_PORTAL = BLOCKS.register("yelloriumworld_portal",
+            () -> new ModPortalBlock(SoftFrames.pair("bigreactors:yellorium_block", IND_FRAME_YELLORIUM), ModDimensions.YELLORIUMWORLD));
+    public static final RegistryObject<ModPortalBlock> CERTUSWORLD_PORTAL = BLOCKS.register("certusworld_portal",
+            () -> new ModPortalBlock(SoftFrames.pair("ae2:quartz_block", IND_FRAME_CERTUS), ModDimensions.CERTUSWORLD));
 }

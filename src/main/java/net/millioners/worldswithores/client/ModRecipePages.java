@@ -8,6 +8,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.millioners.worldswithores.registry.ModBlocks;
 import net.millioners.worldswithores.registry.ModItems;
+import net.millioners.worldswithores.util.SoftFrames;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -19,6 +20,7 @@ public final class ModRecipePages {
         GUIDE("gui.worlds_with_ores.recipe_book.guide"),
         MATERIALS("gui.worlds_with_ores.recipe_book.materials"),
         PORTALS("gui.worlds_with_ores.recipe_book.portals"),
+        INDUSTRIAL("gui.worlds_with_ores.recipe_book.industrial"),
         COMPAT("gui.worlds_with_ores.recipe_book.compat"),
         TOOLS("gui.worlds_with_ores.recipe_book.tools"),
         ARMOR("gui.worlds_with_ores.recipe_book.armor"),
@@ -45,7 +47,7 @@ public final class ModRecipePages {
             ItemStack result,
             Component hint,
             ItemStack frameBlock,
-            ItemStack portalBlock
+            ItemStack portalPreview
     ) {
         public static Page crafting(String titleKey, ItemStack[] pattern, ItemStack result) {
             return new Page(Component.translatable(titleKey), Kind.CRAFTING, pattern, result,
@@ -67,13 +69,9 @@ public final class ModRecipePages {
                     Component.translatable(hintKey), ItemStack.EMPTY, ItemStack.EMPTY);
         }
 
-        public static Page portal(String titleKey, ItemLike frame, ItemLike portal, ItemLike igniter, String hintKey) {
-            ItemStack portalStack = new ItemStack(portal.asItem());
-            if (portalStack.isEmpty()) {
-                portalStack = new ItemStack(Items.PURPLE_STAINED_GLASS);
-            }
+        public static Page portal(String titleKey, ItemLike frame, ItemLike preview, ItemLike igniter, String hintKey) {
             return new Page(Component.translatable(titleKey), Kind.PORTAL, new ItemStack[0], i(igniter),
-                    Component.translatable(hintKey), i(frame), portalStack);
+                    Component.translatable(hintKey), i(frame), i(preview));
         }
     }
 
@@ -84,6 +82,7 @@ public final class ModRecipePages {
             case GUIDE -> guide();
             case MATERIALS -> materials();
             case PORTALS -> portals();
+            case INDUSTRIAL -> industrial();
             case COMPAT -> compat();
             case TOOLS -> tools();
             case ARMOR -> armor();
@@ -116,6 +115,10 @@ public final class ModRecipePages {
         return item == null || item == Items.AIR ? ItemStack.EMPTY : new ItemStack(item);
     }
 
+    private static ItemStack softFrameStack(String preferredId, net.minecraft.world.level.block.Block fallback) {
+        return new ItemStack(SoftFrames.resolve(preferredId, () -> fallback));
+    }
+
     private static List<Page> guide() {
         List<Page> list = new ArrayList<>();
         list.add(Page.info("gui.worlds_with_ores.book.guide.portals.title", icons(
@@ -127,6 +130,9 @@ public final class ModRecipePages {
                 ModItems.CATALYST_ORE_GOLD.get(),
                 ModItems.CATALYST_ORE_DIAMOND.get()
         ), "gui.worlds_with_ores.book.guide.progress.hint"));
+        list.add(Page.info("gui.worlds_with_ores.book.guide.industrial.title", icons(
+                ModItems.IND_ORE_ZINC.get(), ModItems.IND_FRAME_ZINC.get(), ModItems.ZINCWORLD.get()
+        ), "gui.worlds_with_ores.book.guide.industrial.hint"));
         list.add(Page.info("gui.worlds_with_ores.book.guide.smelt.title", icons(
                 ModItems.CATALYST_COAL.get(), Items.FURNACE, ModItems.INGOT_COAL.get()
         ), "gui.worlds_with_ores.book.guide.smelt.hint"));
@@ -149,26 +155,79 @@ public final class ModRecipePages {
                 "gui.worlds_with_ores.book.mat.lapis.hint"));
         list.add(Page.smelting("gui.worlds_with_ores.book.mat.redstone", i(ModItems.CATALYST_REDSTONE.get()), i(ModItems.INGOT_REDSTONE.get()),
                 "gui.worlds_with_ores.book.mat.redstone.hint"));
+        list.add(Page.smelting("gui.worlds_with_ores.book.mat.zinc", i(ModItems.IND_RAW_ZINC.get()), i(ModItems.IND_INGOT_ZINC.get()),
+                "gui.worlds_with_ores.book.mat.zinc.hint"));
+        list.add(Page.smelting("gui.worlds_with_ores.book.mat.osmium", i(ModItems.IND_RAW_OSMIUM.get()), i(ModItems.IND_INGOT_OSMIUM.get()),
+                "gui.worlds_with_ores.book.mat.osmium.hint"));
+        list.add(Page.smelting("gui.worlds_with_ores.book.mat.aluminum", i(ModItems.IND_RAW_ALUMINUM.get()), i(ModItems.IND_INGOT_ALUMINUM.get()),
+                "gui.worlds_with_ores.book.mat.aluminum.hint"));
+        list.add(Page.smelting("gui.worlds_with_ores.book.mat.silver", i(ModItems.IND_RAW_SILVER.get()), i(ModItems.IND_INGOT_SILVER.get()),
+                "gui.worlds_with_ores.book.mat.silver.hint"));
+        list.add(Page.smelting("gui.worlds_with_ores.book.mat.yellorium", i(ModItems.IND_RAW_YELLORIUM.get()), i(ModItems.IND_INGOT_YELLORIUM.get()),
+                "gui.worlds_with_ores.book.mat.yellorium.hint"));
+        list.add(Page.smelting("gui.worlds_with_ores.book.mat.certus", i(ModItems.IND_RAW_CERTUS.get()), i(ModItems.IND_INGOT_CERTUS.get()),
+                "gui.worlds_with_ores.book.mat.certus.hint"));
         return list;
     }
 
     private static List<Page> portals() {
         List<Page> list = new ArrayList<>();
-        addPortal(list, "coal", Blocks.COAL_BLOCK, ModBlocks.COALWORD_PORTAL.get(), ModItems.INGOT_COAL.get(), ModItems.COALWORD.get());
-        addPortal(list, "iron", Blocks.IRON_BLOCK, ModBlocks.IRONWORLD_PORTAL.get(), ModItems.INGOT_IRON.get(), ModItems.IRONWORLD.get());
-        addPortal(list, "gold", Blocks.GOLD_BLOCK, ModBlocks.GOLDWORLD_PORTAL.get(), ModItems.INGOT_GOLD.get(), ModItems.GOLDWORLD.get());
-        addPortal(list, "diamond", Blocks.DIAMOND_BLOCK, ModBlocks.DIAMONDWORLD_PORTAL.get(), ModItems.INGOT_DIAMOND.get(), ModItems.DIAMONDWORLD.get());
-        addPortal(list, "emerald", Blocks.EMERALD_BLOCK, ModBlocks.EMERALDWORLD_PORTAL.get(), ModItems.INGOT_EMERALD.get(), ModItems.EMERALDWORLD.get());
-        addPortal(list, "lapis", Blocks.LAPIS_BLOCK, ModBlocks.LAPISWORLD_PORTAL.get(), ModItems.INGOT_LAPIS.get(), ModItems.LAPISWORLD.get());
-        addPortal(list, "redstone", Blocks.REDSTONE_BLOCK, ModBlocks.REDSTONEWORLD_PORTAL.get(), ModItems.INGOT_REDSTONE.get(), ModItems.REDSTONEWORLD.get());
+        addPortal(list, "coal", Blocks.COAL_BLOCK, ModItems.PORTAL_PREVIEW_COAL.get(), ModItems.INGOT_COAL.get(), ModItems.COALWORD.get());
+        addPortal(list, "iron", Blocks.IRON_BLOCK, ModItems.PORTAL_PREVIEW_IRON.get(), ModItems.INGOT_IRON.get(), ModItems.IRONWORLD.get());
+        addPortal(list, "gold", Blocks.GOLD_BLOCK, ModItems.PORTAL_PREVIEW_GOLD.get(), ModItems.INGOT_GOLD.get(), ModItems.GOLDWORLD.get());
+        addPortal(list, "diamond", Blocks.DIAMOND_BLOCK, ModItems.PORTAL_PREVIEW_DIAMOND.get(), ModItems.INGOT_DIAMOND.get(), ModItems.DIAMONDWORLD.get());
+        addPortal(list, "emerald", Blocks.EMERALD_BLOCK, ModItems.PORTAL_PREVIEW_EMERALD.get(), ModItems.INGOT_EMERALD.get(), ModItems.EMERALDWORLD.get());
+        addPortal(list, "lapis", Blocks.LAPIS_BLOCK, ModItems.PORTAL_PREVIEW_LAPIS.get(), ModItems.INGOT_LAPIS.get(), ModItems.LAPISWORLD.get());
+        addPortal(list, "redstone", Blocks.REDSTONE_BLOCK, ModItems.PORTAL_PREVIEW_REDSTONE.get(), ModItems.INGOT_REDSTONE.get(), ModItems.REDSTONEWORLD.get());
         return list;
     }
 
-    private static void addPortal(List<Page> list, String id, ItemLike frame, ItemLike portal, ItemLike ingot, ItemLike igniter) {
+    private static List<Page> industrial() {
+        List<Page> list = new ArrayList<>();
+        list.add(Page.info("gui.worlds_with_ores.book.industrial.intro.title", icons(
+                ModItems.IND_ORE_ZINC.get(), ModItems.IND_ORE_OSMIUM.get(), ModItems.IND_ORE_ALUMINUM.get()
+        ), "gui.worlds_with_ores.book.industrial.intro.hint"));
+        addIndPortal(list, "zinc", "create:zinc_block", ModBlocks.IND_FRAME_ZINC.get(),
+                ModItems.PORTAL_PREVIEW_ZINC.get(), ModItems.IND_INGOT_ZINC.get(), ModItems.ZINCWORLD.get());
+        addIndPortal(list, "osmium", "mekanism:block_osmium", ModBlocks.IND_FRAME_OSMIUM.get(),
+                ModItems.PORTAL_PREVIEW_OSMIUM.get(), ModItems.IND_INGOT_OSMIUM.get(), ModItems.OSMIUMWORLD.get());
+        addIndPortal(list, "aluminum", "immersiveengineering:storage_aluminum", ModBlocks.IND_FRAME_ALUMINUM.get(),
+                ModItems.PORTAL_PREVIEW_ALUMINUM.get(), ModItems.IND_INGOT_ALUMINUM.get(), ModItems.ALUMINUMWORLD.get());
+        addIndPortal(list, "silver", "thermal:silver_block", ModBlocks.IND_FRAME_SILVER.get(),
+                ModItems.PORTAL_PREVIEW_SILVER.get(), ModItems.IND_INGOT_SILVER.get(), ModItems.SILVERWORLD.get());
+        addIndPortal(list, "yellorium", "bigreactors:yellorium_block", ModBlocks.IND_FRAME_YELLORIUM.get(),
+                ModItems.PORTAL_PREVIEW_YELLORIUM.get(), ModItems.IND_INGOT_YELLORIUM.get(), ModItems.YELLORIUMWORLD.get());
+        addIndPortal(list, "certus", "ae2:quartz_block", ModBlocks.IND_FRAME_CERTUS.get(),
+                ModItems.PORTAL_PREVIEW_CERTUS.get(), ModItems.IND_INGOT_CERTUS.get(), ModItems.CERTUSWORLD.get());
+        return list;
+    }
+
+    private static void addPortal(List<Page> list, String id, ItemLike frame, ItemLike preview, ItemLike ingot, ItemLike igniter) {
         list.add(Page.portal(
                 "gui.worlds_with_ores.book.portal." + id + ".frame",
-                frame, portal, igniter,
+                frame, preview, igniter,
                 "gui.worlds_with_ores.book.portal." + id + ".frame.hint"
+        ));
+        list.add(Page.crafting(
+                "gui.worlds_with_ores.book.portal." + id + ".igniter",
+                shaped(ingot, ingot, ingot, ingot, Items.FLINT, ingot, ingot, ingot, ingot),
+                i(igniter),
+                "gui.worlds_with_ores.book.portal.igniter.hint"
+        ));
+    }
+
+    private static void addIndPortal(List<Page> list, String id, String preferredFrame,
+                                     net.minecraft.world.level.block.Block fallbackFrame,
+                                     ItemLike preview, ItemLike ingot, ItemLike igniter) {
+        ItemStack frame = softFrameStack(preferredFrame, fallbackFrame);
+        list.add(new Page(
+                Component.translatable("gui.worlds_with_ores.book.portal." + id + ".frame"),
+                Kind.PORTAL,
+                new ItemStack[0],
+                i(igniter),
+                Component.translatable("gui.worlds_with_ores.book.portal." + id + ".frame.hint"),
+                frame,
+                i(preview)
         ));
         list.add(Page.crafting(
                 "gui.worlds_with_ores.book.portal." + id + ".igniter",

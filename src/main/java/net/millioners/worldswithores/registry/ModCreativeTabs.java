@@ -45,6 +45,38 @@ public class ModCreativeTabs {
                         output.accept(ModItems.EMERALDWORLD.get());
                         output.accept(ModItems.LAPISWORLD.get());
                         output.accept(ModItems.REDSTONEWORLD.get());
+
+                        output.accept(ModItems.IND_ORE_ZINC.get());
+                        output.accept(ModItems.IND_ORE_OSMIUM.get());
+                        output.accept(ModItems.IND_ORE_ALUMINUM.get());
+                        output.accept(ModItems.IND_ORE_SILVER.get());
+                        output.accept(ModItems.IND_ORE_YELLORIUM.get());
+                        output.accept(ModItems.IND_ORE_CERTUS.get());
+                        output.accept(ModItems.IND_FRAME_ZINC.get());
+                        output.accept(ModItems.IND_FRAME_OSMIUM.get());
+                        output.accept(ModItems.IND_FRAME_ALUMINUM.get());
+                        output.accept(ModItems.IND_FRAME_SILVER.get());
+                        output.accept(ModItems.IND_FRAME_YELLORIUM.get());
+                        output.accept(ModItems.IND_FRAME_CERTUS.get());
+                        output.accept(ModItems.IND_RAW_ZINC.get());
+                        output.accept(ModItems.IND_RAW_OSMIUM.get());
+                        output.accept(ModItems.IND_RAW_ALUMINUM.get());
+                        output.accept(ModItems.IND_RAW_SILVER.get());
+                        output.accept(ModItems.IND_RAW_YELLORIUM.get());
+                        output.accept(ModItems.IND_RAW_CERTUS.get());
+                        output.accept(ModItems.IND_INGOT_ZINC.get());
+                        output.accept(ModItems.IND_INGOT_OSMIUM.get());
+                        output.accept(ModItems.IND_INGOT_ALUMINUM.get());
+                        output.accept(ModItems.IND_INGOT_SILVER.get());
+                        output.accept(ModItems.IND_INGOT_YELLORIUM.get());
+                        output.accept(ModItems.IND_INGOT_CERTUS.get());
+                        output.accept(ModItems.ZINCWORLD.get());
+                        output.accept(ModItems.OSMIUMWORLD.get());
+                        output.accept(ModItems.ALUMINUMWORLD.get());
+                        output.accept(ModItems.SILVERWORLD.get());
+                        output.accept(ModItems.YELLORIUMWORLD.get());
+                        output.accept(ModItems.CERTUSWORLD.get());
+
                         output.accept(ModItems.NETHERBRICKBRINSTAR.get());
                         output.accept(ModItems.NETHERBRICKCLASSICSPATTER.get());
                         output.accept(ModItems.NETHERBRICKGUTS.get());

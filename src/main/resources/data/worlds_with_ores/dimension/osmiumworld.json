@@ -1,0 +1,11 @@
+{
+  "type": "worlds_with_ores:osmiumworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "worlds_with_ores:osmiumworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "worlds_with_ores:osmium_lands"
+    }
+  }
+}

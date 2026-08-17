@@ -1,0 +1,11 @@
+{
+  "type": "worlds_with_ores:yelloriumworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "worlds_with_ores:yelloriumworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "worlds_with_ores:yellorium_lands"
+    }
+  }
+}

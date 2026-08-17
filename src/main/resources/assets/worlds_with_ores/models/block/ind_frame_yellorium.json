@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "worlds_with_ores:block/ind_frame_yellorium"
+  }
+}

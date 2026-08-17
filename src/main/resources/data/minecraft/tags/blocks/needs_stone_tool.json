@@ -1,6 +1,18 @@
-﻿{
+{
   "replace": false,
   "values": [
+    "worlds_with_ores:ind_frame_aluminum",
+    "worlds_with_ores:ind_frame_certus",
+    "worlds_with_ores:ind_frame_osmium",
+    "worlds_with_ores:ind_frame_silver",
+    "worlds_with_ores:ind_frame_yellorium",
+    "worlds_with_ores:ind_frame_zinc",
+    "worlds_with_ores:ind_ore_aluminum",
+    "worlds_with_ores:ind_ore_certus",
+    "worlds_with_ores:ind_ore_osmium",
+    "worlds_with_ores:ind_ore_silver",
+    "worlds_with_ores:ind_ore_yellorium",
+    "worlds_with_ores:ind_ore_zinc",
     "worlds_with_ores:netherbrickbrinstar",
     "worlds_with_ores:netherbrickclassicspatter",
     "worlds_with_ores:netherbrickguts",

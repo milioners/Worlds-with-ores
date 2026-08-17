@@ -1,0 +1,11 @@
+{
+  "type": "worlds_with_ores:certusworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "worlds_with_ores:certusworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "worlds_with_ores:certus_lands"
+    }
+  }
+}

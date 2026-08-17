@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "worlds_with_ores:block/silverworld_portal_ns"
+    },
+    "axis=z": {
+      "model": "worlds_with_ores:block/silverworld_portal_ew"
+    }
+  }
+}
