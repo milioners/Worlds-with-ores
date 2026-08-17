@@ -12,7 +12,9 @@
   },
   "carvers": {},
   "features": [
-    [],
+    [
+      "worlds_with_ores:soft_fill_zinc"
+    ],
     [],
     [],
     [],

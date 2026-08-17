@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "worlds_with_ores:ind_raw_zinc"
-  },
-  "result": "worlds_with_ores:ind_ingot_zinc",
-  "experience": 0.7,
-  "cookingtime": 200
-}

@@ -97,7 +97,7 @@
       {
         "target": {
           "predicate_type": "minecraft:block_match",
-          "block": "worlds_with_ores:ind_ore_zinc"
+          "block": "create:zinc_ore"
         },
         "state": {
           "Name": "worlds_with_ores:netherbricklavabrown"
@@ -106,7 +106,7 @@
       {
         "target": {
           "predicate_type": "minecraft:block_match",
-          "block": "worlds_with_ores:ind_ore_osmium"
+          "block": "create:deepslate_zinc_ore"
         },
         "state": {
           "Name": "worlds_with_ores:netherbricklavabrown"
@@ -115,7 +115,7 @@
       {
         "target": {
           "predicate_type": "minecraft:block_match",
-          "block": "worlds_with_ores:ind_ore_aluminum"
+          "block": "mekanism:osmium_ore"
         },
         "state": {
           "Name": "worlds_with_ores:netherbricklavabrown"
@@ -124,7 +124,7 @@
       {
         "target": {
           "predicate_type": "minecraft:block_match",
-          "block": "worlds_with_ores:ind_ore_silver"
+          "block": "mekanism:deepslate_osmium_ore"
         },
         "state": {
           "Name": "worlds_with_ores:netherbricklavabrown"
@@ -133,7 +133,7 @@
       {
         "target": {
           "predicate_type": "minecraft:block_match",
-          "block": "worlds_with_ores:ind_ore_yellorium"
+          "block": "immersiveengineering:ore_aluminum"
         },
         "state": {
           "Name": "worlds_with_ores:netherbricklavabrown"
@@ -142,7 +142,61 @@
       {
         "target": {
           "predicate_type": "minecraft:block_match",
-          "block": "worlds_with_ores:ind_ore_certus"
+          "block": "immersiveengineering:deepslate_ore_aluminum"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbricklavabrown"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "thermal:silver_ore"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbricklavabrown"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "thermal:deepslate_silver_ore"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbricklavabrown"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "bigreactors:yellorite_ore"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbricklavabrown"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "bigreactors:deepslate_yellorite_ore"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbricklavabrown"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "ae2:quartz_ore"
+        },
+        "state": {
+          "Name": "worlds_with_ores:netherbricklavabrown"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "ae2:deepslate_quartz_ore"
         },
         "state": {
           "Name": "worlds_with_ores:netherbricklavabrown"

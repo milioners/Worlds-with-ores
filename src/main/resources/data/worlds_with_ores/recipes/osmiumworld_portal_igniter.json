@@ -1,5 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
   "pattern": [
     "III",
     "IFI",
@@ -7,7 +13,7 @@
   ],
   "key": {
     "I": {
-      "item": "worlds_with_ores:ind_ingot_osmium"
+      "item": "mekanism:ingot_osmium"
     },
     "F": {
       "item": "minecraft:flint"

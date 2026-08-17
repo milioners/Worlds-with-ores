@@ -1,8 +1,8 @@
 {
   "textures": {
-    "frame": "worlds_with_ores:block/ind_frame_silver",
+    "frame": "thermal:block/silver_block",
     "portal": "worlds_with_ores:block/portal_panel_silver",
-    "particle": "worlds_with_ores:block/ind_frame_silver"
+    "particle": "thermal:block/silver_block"
   },
   "elements": [
     {

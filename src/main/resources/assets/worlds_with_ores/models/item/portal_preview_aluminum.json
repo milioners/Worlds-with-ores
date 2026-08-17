@@ -1,8 +1,8 @@
 {
   "textures": {
-    "frame": "worlds_with_ores:block/ind_frame_aluminum",
+    "frame": "immersiveengineering:block/metal/storage_aluminum",
     "portal": "worlds_with_ores:block/portal_panel_aluminum",
-    "particle": "worlds_with_ores:block/ind_frame_aluminum"
+    "particle": "immersiveengineering:block/metal/storage_aluminum"
   },
   "elements": [
     {

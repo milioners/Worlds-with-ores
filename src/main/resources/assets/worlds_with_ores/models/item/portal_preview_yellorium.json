@@ -1,8 +1,8 @@
 {
   "textures": {
-    "frame": "worlds_with_ores:block/ind_frame_yellorium",
+    "frame": "bigreactors:block/yellorium_block",
     "portal": "worlds_with_ores:block/portal_panel_yellorium",
-    "particle": "worlds_with_ores:block/ind_frame_yellorium"
+    "particle": "bigreactors:block/yellorium_block"
   },
   "elements": [
     {

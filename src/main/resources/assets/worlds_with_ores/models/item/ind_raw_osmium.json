@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "worlds_with_ores:item/ind_raw_osmium"
-  }
-}

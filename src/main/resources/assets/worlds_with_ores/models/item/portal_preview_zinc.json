@@ -1,8 +1,8 @@
 {
   "textures": {
-    "frame": "worlds_with_ores:block/ind_frame_zinc",
+    "frame": "create:block/zinc_block",
     "portal": "worlds_with_ores:block/portal_panel_zinc",
-    "particle": "worlds_with_ores:block/ind_frame_zinc"
+    "particle": "create:block/zinc_block"
   },
   "elements": [
     {

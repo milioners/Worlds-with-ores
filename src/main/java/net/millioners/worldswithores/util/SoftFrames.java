@@ -10,36 +10,30 @@ import java.util.List;
 import java.util.function.Supplier;
 
 /**
- * Resolves optional mod frame blocks; falls back to our own blocks when the mod is absent.
+ * Resolves optional mod frame blocks for industrial portals.
  */
 public final class SoftFrames {
     private SoftFrames() {}
 
-    public static Block resolve(String preferredId, Supplier<Block> fallback) {
+    public static Block resolve(String preferredId) {
         Block preferred = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(preferredId));
         if (preferred != null && preferred != Blocks.AIR) {
             return preferred;
         }
-        return fallback.get();
+        return Blocks.AIR;
     }
 
-    public static Supplier<Block> soft(String preferredId, Supplier<Block> fallback) {
-        return () -> resolve(preferredId, fallback);
+    public static Block resolve(String preferredId, Supplier<Block> fallback) {
+        Block preferred = resolve(preferredId);
+        return preferred != Blocks.AIR ? preferred : fallback.get();
     }
 
-    /** Preferred (if loaded) + always-available fallback, for portal lighting/validation. */
-    @SafeVarargs
-    public static List<Supplier<Block>> pair(String preferredId, Supplier<Block> fallback, Supplier<Block>... extra) {
-        List<Supplier<Block>> list = new ArrayList<>();
-        list.add(() -> {
-            Block preferred = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(preferredId));
-            return preferred == null ? Blocks.AIR : preferred;
-        });
-        list.add(fallback);
-        for (Supplier<Block> e : extra) {
-            list.add(e);
-        }
-        return list;
+    public static Supplier<Block> soft(String preferredId) {
+        return () -> resolve(preferredId);
+    }
+
+    public static List<Supplier<Block>> only(String preferredId) {
+        return List.of(soft(preferredId));
     }
 
     public static List<Block> resolveAll(List<Supplier<Block>> suppliers) {

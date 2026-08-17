@@ -1,8 +1,8 @@
 {
   "textures": {
-    "frame": "worlds_with_ores:block/ind_frame_certus",
+    "frame": "ae2:block/quartz_block",
     "portal": "worlds_with_ores:block/portal_panel_certus",
-    "particle": "worlds_with_ores:block/ind_frame_certus"
+    "particle": "ae2:block/quartz_block"
   },
   "elements": [
     {

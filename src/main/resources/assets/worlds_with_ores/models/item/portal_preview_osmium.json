@@ -1,8 +1,8 @@
 {
   "textures": {
-    "frame": "worlds_with_ores:block/ind_frame_osmium",
+    "frame": "mekanism:block/block_osmium",
     "portal": "worlds_with_ores:block/portal_panel_osmium",
-    "particle": "worlds_with_ores:block/ind_frame_osmium"
+    "particle": "mekanism:block/block_osmium"
   },
   "elements": [
     {

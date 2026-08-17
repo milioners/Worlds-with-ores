@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "worlds_with_ores:ind_raw_osmium"
-  },
-  "result": "worlds_with_ores:ind_ingot_osmium",
-  "experience": 0.7,
-  "cookingtime": 100
-}

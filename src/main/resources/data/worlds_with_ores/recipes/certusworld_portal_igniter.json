@@ -1,5 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
   "pattern": [
     "III",
     "IFI",
@@ -7,7 +13,7 @@
   ],
   "key": {
     "I": {
-      "item": "worlds_with_ores:ind_ingot_certus"
+      "item": "ae2:certus_quartz_crystal"
     },
     "F": {
       "item": "minecraft:flint"
