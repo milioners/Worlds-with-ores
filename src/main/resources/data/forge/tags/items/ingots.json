@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/portal_coal",
+    "#forge:ingots/portal_iron",
+    "#forge:ingots/portal_gold",
+    "#forge:ingots/portal_diamond",
+    "#forge:ingots/portal_emerald",
+    "#forge:ingots/portal_lapis",
+    "#forge:ingots/portal_redstone"
+  ]
+}

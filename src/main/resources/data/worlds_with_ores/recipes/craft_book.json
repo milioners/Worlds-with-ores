@@ -1,0 +1,16 @@
+{
+  "group": "worlds_with_ores",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "minecraft:saplings"
+    },
+    {
+      "item": "minecraft:book"
+    }
+  ],
+  "result": {
+    "item": "worlds_with_ores:recipes_book",
+    "count": 1
+  }
+}

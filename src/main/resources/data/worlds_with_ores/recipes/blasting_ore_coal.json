@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "worlds_with_ores:catalyst_ore_coal"
+  },
+  "result": "worlds_with_ores:ingot_coal",
+  "experience": 0.7,
+  "cookingtime": 100
+}

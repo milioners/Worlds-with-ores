@@ -1,0 +1,23 @@
+{
+  "type": "thermal:smelter",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal_expansion"
+    }
+  ],
+  "ingredient": {
+    "item": "worlds_with_ores:catalyst_ore_coal"
+  },
+  "result": [
+    {
+      "item": "worlds_with_ores:ingot_coal",
+      "chance": 1.0
+    },
+    {
+      "item": "thermal:rich_slag",
+      "chance": 0.15
+    }
+  ],
+  "experience": 0.2
+}

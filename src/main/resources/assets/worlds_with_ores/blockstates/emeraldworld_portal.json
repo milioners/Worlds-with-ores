@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "worlds_with_ores:block/emeraldworld_portal_ew"
+    },
+    "axis=x": {
+      "model": "worlds_with_ores:block/emeraldworld_portal_ns"
+    }
+  }
+}

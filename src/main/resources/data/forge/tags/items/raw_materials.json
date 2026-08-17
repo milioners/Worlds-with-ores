@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:raw_materials/portal_coal",
+    "#forge:raw_materials/portal_iron",
+    "#forge:raw_materials/portal_gold",
+    "#forge:raw_materials/portal_diamond",
+    "#forge:raw_materials/portal_emerald",
+    "#forge:raw_materials/portal_lapis",
+    "#forge:raw_materials/portal_redstone"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "group": "worlds_with_ores",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    " 4 ",
+    " 7 "
+  ],
+  "key": {
+    "0": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "1": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "2": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "4": {
+      "item": "minecraft:stick"
+    },
+    "7": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:lava_obsidian_pickaxe",
+    "count": 1
+  }
+}

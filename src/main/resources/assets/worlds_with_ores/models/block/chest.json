@@ -1,0 +1,13 @@
+{
+  "parent": "worlds_with_ores:custom/craftingtable",
+  "textures": {
+    "all": "worlds_with_ores:block/iron_block",
+    "particle": "worlds_with_ores:block/iron_block",
+    "0": "worlds_with_ores:block/iron_block",
+    "1": "worlds_with_ores:block/plank",
+    "2": "worlds_with_ores:block/black_wool",
+    "3": "worlds_with_ores:block/green",
+    "4": "worlds_with_ores:block/wool_colored_red",
+    "5": "worlds_with_ores:block/wool_colored_bleu"
+  }
+}

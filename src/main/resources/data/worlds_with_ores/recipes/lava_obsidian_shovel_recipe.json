@@ -1,0 +1,24 @@
+{
+  "group": "worlds_with_ores",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0",
+    "1",
+    "2"
+  ],
+  "key": {
+    "0": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "1": {
+      "item": "minecraft:stick"
+    },
+    "2": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:lava_obsidian_shovel",
+    "count": 1
+  }
+}

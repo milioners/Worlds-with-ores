@@ -1,0 +1,25 @@
+{
+  "type": "immersiveengineering:crusher",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "energy": 6000,
+  "input": {
+    "item": "worlds_with_ores:catalyst_ore_redstone"
+  },
+  "result": {
+    "count": 2,
+    "item": "worlds_with_ores:catalyst_redstone"
+  },
+  "secondaries": [
+    {
+      "chance": 0.15,
+      "output": {
+        "item": "worlds_with_ores:catalyst_redstone"
+      }
+    }
+  ]
+}

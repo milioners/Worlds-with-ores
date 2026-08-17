@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "worlds_with_ores:block/diamondworld_portal_ew"
+    },
+    "axis=x": {
+      "model": "worlds_with_ores:block/diamondworld_portal_ns"
+    }
+  }
+}

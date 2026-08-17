@@ -1,0 +1,11 @@
+{
+  "type": "worlds_with_ores:ironworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "worlds_with_ores:ironworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "worlds_with_ores:ore_lands"
+    }
+  }
+}

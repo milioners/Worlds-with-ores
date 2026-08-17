@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "worlds_with_ores:catalyst_lapis"
+  },
+  "result": "worlds_with_ores:ingot_lapis",
+  "experience": 0.7,
+  "cookingtime": 100
+}

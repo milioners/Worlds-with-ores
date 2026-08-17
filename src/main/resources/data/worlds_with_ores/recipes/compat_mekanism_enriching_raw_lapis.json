@@ -1,0 +1,17 @@
+{
+  "type": "mekanism:enriching",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
+  "input": {
+    "ingredient": {
+      "item": "worlds_with_ores:catalyst_lapis"
+    }
+  },
+  "output": {
+    "item": "worlds_with_ores:ingot_lapis"
+  }
+}

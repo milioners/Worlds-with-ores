@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "worlds_with_ores:item/enchanted_book"
+  }
+}

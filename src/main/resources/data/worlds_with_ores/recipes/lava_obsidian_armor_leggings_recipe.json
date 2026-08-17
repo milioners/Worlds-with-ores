@@ -1,0 +1,36 @@
+{
+  "group": "worlds_with_ores",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "6 8"
+  ],
+  "key": {
+    "0": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "1": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "2": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "3": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "5": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "6": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    },
+    "8": {
+      "item": "worlds_with_ores:netherbricklavaobsidian"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:lava_obsidian_armor_leggings",
+    "count": 1
+  }
+}

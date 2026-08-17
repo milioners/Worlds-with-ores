@@ -1,0 +1,33 @@
+{
+  "type": "create:crushing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "worlds_with_ores:catalyst_ore_emerald"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "item": "worlds_with_ores:catalyst_emerald",
+      "count": 2
+    },
+    {
+      "chance": 0.25,
+      "item": "worlds_with_ores:catalyst_emerald"
+    },
+    {
+      "chance": 0.75,
+      "item": "create:experience_nugget"
+    },
+    {
+      "chance": 0.125,
+      "item": "minecraft:cobblestone"
+    }
+  ]
+}

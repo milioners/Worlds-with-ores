@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "worlds_with_ores:catalyst_ore_coal",
+    "worlds_with_ores:catalyst_ore_iron",
+    "worlds_with_ores:catalyst_ore_gold",
+    "worlds_with_ores:catalyst_ore_diamond",
+    "worlds_with_ores:catalyst_ore_emerald",
+    "worlds_with_ores:catalyst_ore_lapis",
+    "worlds_with_ores:catalyst_ore_redstone"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "worlds_with_ores:block/redstoneworld_portal_ew"
+    },
+    "axis=x": {
+      "model": "worlds_with_ores:block/redstoneworld_portal_ns"
+    }
+  }
+}

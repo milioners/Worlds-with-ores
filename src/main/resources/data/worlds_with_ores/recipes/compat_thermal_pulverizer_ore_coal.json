@@ -1,0 +1,23 @@
+{
+  "type": "thermal:pulverizer",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal_expansion"
+    }
+  ],
+  "ingredient": {
+    "item": "worlds_with_ores:catalyst_ore_coal"
+  },
+  "result": [
+    {
+      "item": "worlds_with_ores:catalyst_coal",
+      "chance": 2.0
+    },
+    {
+      "item": "minecraft:gravel",
+      "chance": 0.2
+    }
+  ],
+  "experience": 0.2
+}

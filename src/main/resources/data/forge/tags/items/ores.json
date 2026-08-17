@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ores/portal_coal",
+    "#forge:ores/portal_iron",
+    "#forge:ores/portal_gold",
+    "#forge:ores/portal_diamond",
+    "#forge:ores/portal_emerald",
+    "#forge:ores/portal_lapis",
+    "#forge:ores/portal_redstone"
+  ]
+}
