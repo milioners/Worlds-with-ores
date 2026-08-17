@@ -5,7 +5,7 @@
     "settings": "worlds_with_ores:emeraldworld",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "worlds_with_ores:ore_lands"
+      "biome": "worlds_with_ores:emerald_lands"
     }
   }
 }

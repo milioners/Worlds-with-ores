@@ -18,7 +18,9 @@
     [],
     [],
     [],
-    [],
+    [
+      "worlds_with_ores:catalyst_ore_iron_gen"
+    ],
     [],
     [],
     [],

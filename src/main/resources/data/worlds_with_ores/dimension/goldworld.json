@@ -5,7 +5,7 @@
     "settings": "worlds_with_ores:goldworld",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "worlds_with_ores:ore_lands"
+      "biome": "worlds_with_ores:gold_lands"
     }
   }
 }

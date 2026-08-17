@@ -3,8 +3,8 @@
   "downfall": 0.0,
   "has_precipitation": false,
   "effects": {
-    "sky_color": 7907327,
-    "fog_color": 7907327,
+    "sky_color": 12632256,
+    "fog_color": 12632256,
     "water_color": 4159204,
     "water_fog_color": 329011,
     "grass_color": 9470285,
@@ -18,7 +18,9 @@
     [],
     [],
     [],
-    [],
+    [
+      "worlds_with_ores:catalyst_ore_gold_gen"
+    ],
     [],
     [],
     [],
