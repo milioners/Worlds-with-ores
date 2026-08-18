@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "COC",
+    "CEC",
+    "COC"
+  ],
+  "key": {
+    "C": {
+      "item": "worlds_with_ores:flux_casing"
+    },
+    "O": {
+      "item": "worlds_with_ores:flux_coil"
+    },
+    "E": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_charger"
+  }
+}

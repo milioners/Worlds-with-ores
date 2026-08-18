@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CRC",
+    "CEC",
+    "CRC"
+  ],
+  "key": {
+    "C": {
+      "item": "worlds_with_ores:flux_casing"
+    },
+    "R": {
+      "item": "worlds_with_ores:ingot_redstone"
+    },
+    "E": {
+      "item": "worlds_with_ores:flux_core"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_battery"
+  }
+}

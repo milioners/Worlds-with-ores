@@ -175,5 +175,19 @@
   "item.worlds_with_ores.portal_preview_diamond": "Модель портала (diamond)",
   "item.worlds_with_ores.portal_preview_emerald": "Модель портала (emerald)",
   "item.worlds_with_ores.portal_preview_lapis": "Модель портала (lapis)",
-  "item.worlds_with_ores.portal_preview_redstone": "Модель портала (redstone)"
+  "item.worlds_with_ores.portal_preview_redstone": "Модель портала (redstone)",
+  "block.worlds_with_ores.flux_casing": "Обшивка портального флюкса",
+  "block.worlds_with_ores.flux_coil": "Катушка портального флюкса",
+  "block.worlds_with_ores.flux_controller": "Реактор портального флюкса",
+  "block.worlds_with_ores.flux_battery": "Ячейка портального флюкса",
+  "block.worlds_with_ores.flux_charger": "Зарядник портального флюкса",
+  "item.worlds_with_ores.flux_core": "Ядро портального флюкса",
+  "item.worlds_with_ores.portal_flux_pickaxe": "Кирка портального флюкса",
+  "item.worlds_with_ores.portal_flux_pickaxe.energy": "Энергия: %s / %s FE",
+  "gui.worlds_with_ores.flux.fuel": "Топливо",
+  "gui.worlds_with_ores.flux.energy": "Энергия",
+  "gui.worlds_with_ores.flux.energy_tooltip": "%s / %s FE",
+  "gui.worlds_with_ores.flux.formed": "Мультиблок активен",
+  "gui.worlds_with_ores.flux.incomplete": "Структура неполная",
+  "gui.worlds_with_ores.flux.charge_slot": "Заряд"
 }

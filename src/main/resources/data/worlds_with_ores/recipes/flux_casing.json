@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CNC",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "worlds_with_ores:ingot_iron"
+    },
+    "C": {
+      "item": "worlds_with_ores:ingot_coal"
+    },
+    "N": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_casing",
+    "count": 4
+  }
+}

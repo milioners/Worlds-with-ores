@@ -66,6 +66,14 @@ public class ModCreativeTabs {
                             output.accept(ModItems.CERTUSWORLD.get());
                         }
 
+                        output.accept(ModItems.FLUX_CASING.get());
+                        output.accept(ModItems.FLUX_COIL.get());
+                        output.accept(ModItems.FLUX_CONTROLLER.get());
+                        output.accept(ModItems.FLUX_BATTERY.get());
+                        output.accept(ModItems.FLUX_CHARGER.get());
+                        output.accept(ModItems.FLUX_CORE.get());
+                        output.accept(ModItems.PORTAL_FLUX_PICKAXE.get());
+
                         output.accept(ModItems.NETHERBRICKBRINSTAR.get());
                         output.accept(ModItems.NETHERBRICKCLASSICSPATTER.get());
                         output.accept(ModItems.NETHERBRICKGUTS.get());

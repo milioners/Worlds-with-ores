@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.millioners.worldswithores.WorldsWithOresMod;
 import net.millioners.worldswithores.item.ModArmorMaterials;
 import net.millioners.worldswithores.item.ModTiers;
+import net.millioners.worldswithores.item.PortalFluxPickaxeItem;
 import net.millioners.worldswithores.item.PortalIgniterItem;
 import net.millioners.worldswithores.item.RecipesBookItem;
 import net.millioners.worldswithores.util.SoftFrames;
@@ -92,6 +93,17 @@ public class ModItems {
     public static final RegistryObject<Item> CERTUSWORLD = ITEMS.register("certusworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
                     SoftFrames.only("ae2:quartz_block"), ModBlocks.CERTUSWORLD_PORTAL));
+
+    public static final RegistryObject<Item> FLUX_CASING = blockItem("flux_casing", ModBlocks.FLUX_CASING);
+    public static final RegistryObject<Item> FLUX_COIL = blockItem("flux_coil", ModBlocks.FLUX_COIL);
+    public static final RegistryObject<Item> FLUX_CONTROLLER = blockItem("flux_controller", ModBlocks.FLUX_CONTROLLER);
+    public static final RegistryObject<Item> FLUX_BATTERY = blockItem("flux_battery", ModBlocks.FLUX_BATTERY);
+    public static final RegistryObject<Item> FLUX_CHARGER = blockItem("flux_charger", ModBlocks.FLUX_CHARGER);
+
+    public static final RegistryObject<Item> FLUX_CORE = ITEMS.register("flux_core",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> PORTAL_FLUX_PICKAXE = ITEMS.register("portal_flux_pickaxe",
+            PortalFluxPickaxeItem::new);
 
     // Display-only 3D portal models for the recipe book
     public static final RegistryObject<Item> PORTAL_PREVIEW_COAL = ITEMS.register("portal_preview_coal", () -> new Item(new Item.Properties()));

@@ -1,0 +1,91 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "side": "worlds_with_ores:block/flux_controller_on",
+    "top": "worlds_with_ores:block/flux_casing_top",
+    "particle": "worlds_with_ores:block/flux_controller_on"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        16,
+        3
+      ],
+      "to": [
+        13,
+        17,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#top"
+        },
+        "north": {
+          "texture": "#top"
+        },
+        "south": {
+          "texture": "#top"
+        },
+        "east": {
+          "texture": "#top"
+        },
+        "west": {
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        3,
+        0.95
+      ],
+      "to": [
+        11,
+        12,
+        1.05
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

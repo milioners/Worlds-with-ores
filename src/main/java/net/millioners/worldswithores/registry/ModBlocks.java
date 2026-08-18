@@ -9,6 +9,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.millioners.worldswithores.WorldsWithOresMod;
+import net.millioners.worldswithores.block.FluxBatteryBlock;
+import net.millioners.worldswithores.block.FluxCasingBlock;
+import net.millioners.worldswithores.block.FluxChargerBlock;
+import net.millioners.worldswithores.block.FluxCoilBlock;
+import net.millioners.worldswithores.block.FluxControllerBlock;
 import net.millioners.worldswithores.block.ModChestBlock;
 import net.millioners.worldswithores.block.ModPortalBlock;
 import net.millioners.worldswithores.util.SoftFrames;
@@ -98,4 +103,13 @@ public class ModBlocks {
             () -> new ModPortalBlock(SoftFrames.only("bigreactors:yellorium_block"), ModDimensions.YELLORIUMWORLD));
     public static final RegistryObject<ModPortalBlock> CERTUSWORLD_PORTAL = BLOCKS.register("certusworld_portal",
             () -> new ModPortalBlock(SoftFrames.only("ae2:quartz_block"), ModDimensions.CERTUSWORLD));
+
+    public static final RegistryObject<Block> FLUX_CASING = BLOCKS.register("flux_casing", FluxCasingBlock::new);
+    public static final RegistryObject<Block> FLUX_COIL = BLOCKS.register("flux_coil", FluxCoilBlock::new);
+    public static final RegistryObject<FluxControllerBlock> FLUX_CONTROLLER =
+            BLOCKS.register("flux_controller", FluxControllerBlock::new);
+    public static final RegistryObject<FluxBatteryBlock> FLUX_BATTERY =
+            BLOCKS.register("flux_battery", FluxBatteryBlock::new);
+    public static final RegistryObject<FluxChargerBlock> FLUX_CHARGER =
+            BLOCKS.register("flux_charger", FluxChargerBlock::new);
 }

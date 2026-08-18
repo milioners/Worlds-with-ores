@@ -175,5 +175,19 @@
   "item.worlds_with_ores.portal_preview_diamond": "Diamond Portal Model",
   "item.worlds_with_ores.portal_preview_emerald": "Emerald Portal Model",
   "item.worlds_with_ores.portal_preview_lapis": "Lapis Portal Model",
-  "item.worlds_with_ores.portal_preview_redstone": "Redstone Portal Model"
+  "item.worlds_with_ores.portal_preview_redstone": "Redstone Portal Model",
+  "block.worlds_with_ores.flux_casing": "Portal Flux Casing",
+  "block.worlds_with_ores.flux_coil": "Portal Flux Coil",
+  "block.worlds_with_ores.flux_controller": "Portal Flux Reactor",
+  "block.worlds_with_ores.flux_battery": "Portal Flux Cell",
+  "block.worlds_with_ores.flux_charger": "Portal Flux Charger",
+  "item.worlds_with_ores.flux_core": "Portal Flux Core",
+  "item.worlds_with_ores.portal_flux_pickaxe": "Portal Flux Pickaxe",
+  "item.worlds_with_ores.portal_flux_pickaxe.energy": "Energy: %s / %s FE",
+  "gui.worlds_with_ores.flux.fuel": "Fuel",
+  "gui.worlds_with_ores.flux.energy": "Energy",
+  "gui.worlds_with_ores.flux.energy_tooltip": "%s / %s FE",
+  "gui.worlds_with_ores.flux.formed": "Multiblock Online",
+  "gui.worlds_with_ores.flux.incomplete": "Structure Incomplete",
+  "gui.worlds_with_ores.flux.charge_slot": "Charge"
 }
