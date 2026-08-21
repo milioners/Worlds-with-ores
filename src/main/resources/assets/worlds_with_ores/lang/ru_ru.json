@@ -257,8 +257,8 @@
   "tooltip.worlds_with_ores.flux_charger": "Заряжает энергетические инструменты от FE.",
   "tooltip.worlds_with_ores.flux_core": "Крафтовый компонент машин Portal Flux.",
   "tooltip.worlds_with_ores.flux_coolant_cell": "В слот охлаждения реактора. Тратится автоматически при нагреве.",
-  "tooltip.worlds_with_ores.flux_coil_upgrade_advanced": "ПКМ по ЛЮБОЙ части реактора — улучшить все BASIC-катушки (T1->T2). Shift+ПКМ — одну. Нужно 4 штуки для полного T2.",
-  "tooltip.worlds_with_ores.flux_coil_upgrade_quantum": "ПКМ по ЛЮБОЙ части реактора — улучшить все ADVANCED-катушки (T2->T3). Shift+ПКМ — одну. Нужно 4 штуки для полного T3.",
+  "tooltip.worlds_with_ores.flux_coil_upgrade_advanced": "ПКМ по BASIC-катушке (или крафт Катушка + этот предмет). Для полного T2 нужно 4 апгрейда.",
+  "tooltip.worlds_with_ores.flux_coil_upgrade_quantum": "ПКМ по ADVANCED-катушке (или крафт Катушка + этот предмет). Для полного T3 нужно 4 апгрейда.",
   "tooltip.worlds_with_ores.flux_module_output": "Модуль реактора: +25% FE/t (больше нагрева).",
   "tooltip.worlds_with_ores.flux_module_efficiency": "Модуль реактора: +25% к времени топлива.",
   "tooltip.worlds_with_ores.flux_module_cooling": "Модуль реактора: +5 охлаждения / тик.",
@@ -274,5 +274,10 @@
   "message.worlds_with_ores.coil.need_basic_nearby": "Нет BASIC-катушек. Advanced Upgrade работает на T1.",
   "message.worlds_with_ores.coil.need_advanced_nearby": "Нет ADVANCED-катушек. Сначала улучшите BASIC до T2.",
   "message.worlds_with_ores.coil.no_controller": "Рядом нет контроллера Flux Reactor.",
-  "gui.worlds_with_ores.flux.coil_hint": "Катушки: ПКМ апгрейдом по любой части (Shift = одна)"
+  "gui.worlds_with_ores.flux.coil_hint": "Катушки: крафт с апгрейдом ИЛИ ПКМ апгрейдом",
+  "message.worlds_with_ores.coil.need_upgrade_item": "Возьмите Advanced/Quantum Coil Upgrade, чтобы улучшить катушки.",
+  "message.worlds_with_ores.coil.already_upgraded": "Эта катушка уже %s. Нужен следующий тир апгрейда.",
+  "tooltip.worlds_with_ores.flux_coil.tier": "Тир катушки: %s",
+  "tooltip.worlds_with_ores.flux_coil.craft_upgrade": "Скрафтите с апгрейдом на верстаке ИЛИ ПКМ апгрейдом по поставленной катушке.",
+  "tooltip.worlds_with_ores.flux_coil_upgrade.craft": "Также на верстаке: Катушка + Апгрейд"
 }

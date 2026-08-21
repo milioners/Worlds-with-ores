@@ -10,6 +10,8 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.block.Blocks;
 import net.millioners.worldswithores.WorldsWithOresMod;
+import net.millioners.worldswithores.item.FluxCoilBlockItem;
+import net.millioners.worldswithores.item.FluxCoilUpgradeItem;
 import net.millioners.worldswithores.item.FluxTooltipBlockItem;
 import net.millioners.worldswithores.item.FluxTooltipItem;
 import net.millioners.worldswithores.item.ModArmorMaterials;
@@ -17,6 +19,7 @@ import net.millioners.worldswithores.item.ModTiers;
 import net.millioners.worldswithores.item.PortalFluxPickaxeItem;
 import net.millioners.worldswithores.item.PortalIgniterItem;
 import net.millioners.worldswithores.item.RecipesBookItem;
+import net.millioners.worldswithores.block.FluxCoilTier;
 import net.millioners.worldswithores.util.SoftFrames;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -104,8 +107,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> FLUX_CASING = fluxBlockItem("flux_casing", ModBlocks.FLUX_CASING,
             "tooltip.worlds_with_ores.flux_casing");
-    public static final RegistryObject<Item> FLUX_COIL = fluxBlockItem("flux_coil", ModBlocks.FLUX_COIL,
-            "tooltip.worlds_with_ores.flux_coil");
+    public static final RegistryObject<Item> FLUX_COIL = ITEMS.register("flux_coil",
+            () -> new FluxCoilBlockItem(ModBlocks.FLUX_COIL.get(), new Item.Properties(), "tooltip.worlds_with_ores.flux_coil"));
     public static final RegistryObject<Item> FLUX_GLASS = fluxBlockItem("flux_glass", ModBlocks.FLUX_GLASS,
             "tooltip.worlds_with_ores.flux_glass");
     public static final RegistryObject<Item> FLUX_ENERGY_PORT = fluxBlockItem("flux_energy_port", ModBlocks.FLUX_ENERGY_PORT,
@@ -122,9 +125,11 @@ public class ModItems {
     public static final RegistryObject<Item> FLUX_COOLANT_CELL = ITEMS.register("flux_coolant_cell",
             () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_coolant_cell"));
     public static final RegistryObject<Item> FLUX_COIL_UPGRADE_ADVANCED = ITEMS.register("flux_coil_upgrade_advanced",
-            () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_coil_upgrade_advanced"));
+            () -> new FluxCoilUpgradeItem(new Item.Properties().stacksTo(16),
+                    "tooltip.worlds_with_ores.flux_coil_upgrade_advanced", FluxCoilTier.BASIC));
     public static final RegistryObject<Item> FLUX_COIL_UPGRADE_QUANTUM = ITEMS.register("flux_coil_upgrade_quantum",
-            () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_coil_upgrade_quantum"));
+            () -> new FluxCoilUpgradeItem(new Item.Properties().stacksTo(16),
+                    "tooltip.worlds_with_ores.flux_coil_upgrade_quantum", FluxCoilTier.ADVANCED));
     public static final RegistryObject<Item> FLUX_MODULE_OUTPUT = ITEMS.register("flux_module_output",
             () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_output"));
     public static final RegistryObject<Item> FLUX_MODULE_EFFICIENCY = ITEMS.register("flux_module_efficiency",

@@ -103,24 +103,39 @@ public final class FluxMultiblock {
     }
 
     /**
-     * @param singleCoilOnly when true (sneak), upgrade only the clicked coil if it is a coil
+     * @param singleCoilOnly when true (sneak), upgrade only the clicked coil
      */
     public static int applyCoilUpgrade(Level level, BlockPos origin, Player player, ItemStack upgrade, boolean singleCoilOnly) {
-        FluxCoilTier required = upgrade.is(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get())
-                ? FluxCoilTier.BASIC
-                : upgrade.is(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get())
-                ? FluxCoilTier.ADVANCED
-                : null;
+        FluxCoilTier required = null;
+        if (upgrade.getItem() instanceof net.millioners.worldswithores.item.FluxCoilUpgradeItem upgradeItem) {
+            required = upgradeItem.fromTier();
+        } else if (upgrade.is(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get())) {
+            required = FluxCoilTier.BASIC;
+        } else if (upgrade.is(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get())) {
+            required = FluxCoilTier.ADVANCED;
+        }
         if (required == null || upgrade.isEmpty()) {
+            player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.need_upgrade_item"), true);
             return 0;
         }
         FluxCoilTier next = required.next();
 
-        List<BlockPos> coils = findCoils(level, origin);
-        if (singleCoilOnly && level.getBlockState(origin).is(ModBlocks.FLUX_COIL.get())) {
-            coils = List.of(origin);
+        List<BlockPos> coils = new ArrayList<>();
+        if (level.getBlockState(origin).is(ModBlocks.FLUX_COIL.get())) {
+            coils.add(origin.immutable());
         }
-        coils.sort(Comparator.comparingDouble(pos -> pos.distSqr(origin)));
+        if (!singleCoilOnly) {
+            for (BlockPos found : findCoils(level, origin)) {
+                if (!coils.contains(found)) {
+                    coils.add(found);
+                }
+            }
+        } else if (coils.isEmpty()) {
+            // Shift-clicked a non-coil part: upgrade the nearest matching coil only.
+            findCoils(level, origin).stream()
+                    .min(Comparator.comparingDouble(pos -> pos.distSqr(origin)))
+                    .ifPresent(coils::add);
+        }
 
         int upgraded = 0;
         for (BlockPos coilPos : coils) {
@@ -135,7 +150,11 @@ public final class FluxMultiblock {
             if (tier != required) {
                 continue;
             }
-            level.setBlock(coilPos, state.setValue(FluxCoilBlock.TIER, next), Block.UPDATE_ALL);
+            boolean changed = level.setBlock(coilPos, state.setValue(FluxCoilBlock.TIER, next), Block.UPDATE_ALL);
+            if (!changed) {
+                // Force a client sync even if the game thinks nothing changed.
+                level.sendBlockUpdated(coilPos, state, state.setValue(FluxCoilBlock.TIER, next), Block.UPDATE_ALL);
+            }
             if (!player.getAbilities().instabuild) {
                 upgrade.shrink(1);
             }
@@ -144,7 +163,13 @@ public final class FluxMultiblock {
             if (level instanceof ServerLevel serverLevel) {
                 serverLevel.sendParticles(ParticleTypes.END_ROD,
                         coilPos.getX() + 0.5D, coilPos.getY() + 1.0D, coilPos.getZ() + 0.5D,
-                        10, 0.25D, 0.2D, 0.25D, 0.02D);
+                        12, 0.25D, 0.25D, 0.25D, 0.03D);
+                serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER,
+                        coilPos.getX() + 0.5D, coilPos.getY() + 0.8D, coilPos.getZ() + 0.5D,
+                        6, 0.2D, 0.2D, 0.2D, 0.0D);
+            }
+            if (singleCoilOnly) {
+                break;
             }
         }
 
@@ -157,14 +182,20 @@ public final class FluxMultiblock {
         } else if (coils.isEmpty()) {
             player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.none_nearby"), true);
         } else if (required == FluxCoilTier.BASIC) {
-            player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.need_basic_nearby"), true);
+            // Clicked coil may already be upgraded; explain clearly.
+            BlockState originState = level.getBlockState(origin);
+            if (originState.is(ModBlocks.FLUX_COIL.get()) && originState.hasProperty(FluxCoilBlock.TIER)
+                    && originState.getValue(FluxCoilBlock.TIER) != FluxCoilTier.BASIC) {
+                player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.already_upgraded",
+                        originState.getValue(FluxCoilBlock.TIER).getSerializedName().toUpperCase()), true);
+            } else {
+                player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.need_basic_nearby"), true);
+            }
         } else {
-            boolean anyQuantum = coils.stream().anyMatch(pos ->
+            boolean allQuantum = !coils.isEmpty() && coils.stream().allMatch(pos ->
                     level.getBlockState(pos).hasProperty(FluxCoilBlock.TIER)
                             && level.getBlockState(pos).getValue(FluxCoilBlock.TIER) == FluxCoilTier.QUANTUM);
-            if (anyQuantum && coils.stream().allMatch(pos ->
-                    !level.getBlockState(pos).hasProperty(FluxCoilBlock.TIER)
-                            || level.getBlockState(pos).getValue(FluxCoilBlock.TIER) == FluxCoilTier.QUANTUM)) {
+            if (allQuantum) {
                 player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.max"), true);
             } else {
                 player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.need_advanced_nearby"), true);
@@ -196,9 +227,9 @@ public final class FluxMultiblock {
                 }
             }
         }
-        for (int dx = -4; dx <= 4; dx++) {
-            for (int dy = -4; dy <= 4; dy++) {
-                for (int dz = -4; dz <= 4; dz++) {
+        for (int dx = -6; dx <= 6; dx++) {
+            for (int dy = -6; dy <= 6; dy++) {
+                for (int dz = -6; dz <= 6; dz++) {
                     BlockPos check = near.offset(dx, dy, dz);
                     if (level.getBlockState(check).is(ModBlocks.FLUX_COIL.get())) {
                         coils.add(check.immutable());
