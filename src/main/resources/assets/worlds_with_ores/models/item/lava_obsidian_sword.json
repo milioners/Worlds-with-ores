@@ -1,7 +1,6 @@
 {
-  "parent": "worlds_with_ores:custom/sword",
+  "parent": "item/handheld",
   "textures": {
-    "aspect_of_the_end": "worlds_with_ores:block/a1-netherbrick-lavaobsidian",
-    "particle": "worlds_with_ores:item/lavaobsidian_sword"
+    "layer0": "worlds_with_ores:item/lava_obsidian_sword"
   }
 }

@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "worlds_with_ores:block/lapis_ore_portal",
-    "portal": "worlds_with_ores:block/lapis_ore_portal"
+    "particle": "worlds_with_ores:block/portal_panel_lapis",
+    "portal": "worlds_with_ores:block/portal_panel_lapis"
   },
   "elements": [
     {

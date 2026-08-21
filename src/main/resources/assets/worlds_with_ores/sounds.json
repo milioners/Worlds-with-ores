@@ -1,1 +1,18 @@
-{}
+{
+  "reactor_start": {
+    "subtitle": "subtitles.worlds_with_ores.reactor_start",
+    "sounds": [{ "name": "minecraft:block.beacon.activate", "type": "event" }]
+  },
+  "reactor_hum": {
+    "subtitle": "subtitles.worlds_with_ores.reactor_hum",
+    "sounds": [{ "name": "minecraft:block.beacon.ambient", "type": "event" }]
+  },
+  "reactor_coolant": {
+    "subtitle": "subtitles.worlds_with_ores.reactor_coolant",
+    "sounds": [{ "name": "minecraft:block.brewing_stand.brew", "type": "event" }]
+  },
+  "reactor_overheat": {
+    "subtitle": "subtitles.worlds_with_ores.reactor_overheat",
+    "sounds": [{ "name": "minecraft:block.beacon.deactivate", "type": "event" }]
+  }
+}

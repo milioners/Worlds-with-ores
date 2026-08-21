@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "worlds_with_ores:block/a1-netherbrick-brinstar"
+    "all": "worlds_with_ores:block/netherbrick_brinstar"
   }
 }

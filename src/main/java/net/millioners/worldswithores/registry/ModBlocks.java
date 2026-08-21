@@ -14,6 +14,8 @@ import net.millioners.worldswithores.block.FluxCasingBlock;
 import net.millioners.worldswithores.block.FluxChargerBlock;
 import net.millioners.worldswithores.block.FluxCoilBlock;
 import net.millioners.worldswithores.block.FluxControllerBlock;
+import net.millioners.worldswithores.block.FluxEnergyPortBlock;
+import net.millioners.worldswithores.block.FluxGlassBlock;
 import net.millioners.worldswithores.block.ModChestBlock;
 import net.millioners.worldswithores.block.ModPortalBlock;
 import net.millioners.worldswithores.util.SoftFrames;
@@ -106,6 +108,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> FLUX_CASING = BLOCKS.register("flux_casing", FluxCasingBlock::new);
     public static final RegistryObject<Block> FLUX_COIL = BLOCKS.register("flux_coil", FluxCoilBlock::new);
+    public static final RegistryObject<Block> FLUX_GLASS = BLOCKS.register("flux_glass", FluxGlassBlock::new);
+    public static final RegistryObject<FluxEnergyPortBlock> FLUX_ENERGY_PORT =
+            BLOCKS.register("flux_energy_port", FluxEnergyPortBlock::new);
     public static final RegistryObject<FluxControllerBlock> FLUX_CONTROLLER =
             BLOCKS.register("flux_controller", FluxControllerBlock::new);
     public static final RegistryObject<FluxBatteryBlock> FLUX_BATTERY =

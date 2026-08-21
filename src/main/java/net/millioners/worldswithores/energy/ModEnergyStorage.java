@@ -38,6 +38,18 @@ public class ModEnergyStorage extends EnergyStorage {
         setEnergy(this.energy + amount);
     }
 
+    public void setCapacity(int capacity) {
+        int newCapacity = Math.max(1, capacity);
+        if (this.capacity == newCapacity) {
+            return;
+        }
+        this.capacity = newCapacity;
+        if (this.energy > this.capacity) {
+            this.energy = this.capacity;
+        }
+        this.onChanged.run();
+    }
+
     public CompoundTag save() {
         CompoundTag tag = new CompoundTag();
         tag.putInt("Energy", this.energy);

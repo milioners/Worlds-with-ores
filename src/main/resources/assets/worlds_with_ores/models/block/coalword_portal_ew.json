@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "worlds_with_ores:block/coal_ore_portal",
-    "portal": "worlds_with_ores:block/coal_ore_portal"
+    "particle": "worlds_with_ores:block/portal_panel_coal",
+    "portal": "worlds_with_ores:block/portal_panel_coal"
   },
   "elements": [
     {

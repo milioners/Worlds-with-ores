@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "worlds_with_ores:item/lavaobsidian_pickaxe"
+    "layer0": "worlds_with_ores:item/lava_obsidian_pickaxe"
   }
 }

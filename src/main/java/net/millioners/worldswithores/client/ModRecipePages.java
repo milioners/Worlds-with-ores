@@ -2,12 +2,14 @@ package net.millioners.worldswithores.client;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.millioners.worldswithores.registry.ModBlocks;
 import net.millioners.worldswithores.registry.ModItems;
+import net.millioners.worldswithores.blockentity.FluxMultiblock;
 import net.millioners.worldswithores.util.SoftFrames;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +23,7 @@ public final class ModRecipePages {
         MATERIALS("gui.worlds_with_ores.recipe_book.materials"),
         PORTALS("gui.worlds_with_ores.recipe_book.portals"),
         INDUSTRIAL("gui.worlds_with_ores.recipe_book.industrial"),
+        ENERGY("gui.worlds_with_ores.recipe_book.energy"),
         COMPAT("gui.worlds_with_ores.recipe_book.compat"),
         TOOLS("gui.worlds_with_ores.recipe_book.tools"),
         ARMOR("gui.worlds_with_ores.recipe_book.armor"),
@@ -37,7 +40,8 @@ public final class ModRecipePages {
         CRAFTING,
         SMELTING,
         INFO,
-        PORTAL
+        PORTAL,
+        MULTIBLOCK
     }
 
     public record Page(
@@ -73,6 +77,11 @@ public final class ModRecipePages {
             return new Page(Component.translatable(titleKey), Kind.PORTAL, new ItemStack[0], i(igniter),
                     Component.translatable(hintKey), i(frame), i(preview));
         }
+
+        public static Page multiblock(String titleKey, ItemStack[] layers, String hintKey) {
+            return new Page(Component.translatable(titleKey), Kind.MULTIBLOCK, layers, ItemStack.EMPTY,
+                    Component.translatable(hintKey), ItemStack.EMPTY, ItemStack.EMPTY);
+        }
     }
 
     private ModRecipePages() {}
@@ -83,6 +92,7 @@ public final class ModRecipePages {
             case MATERIALS -> materials();
             case PORTALS -> portals();
             case INDUSTRIAL -> industrial();
+            case ENERGY -> energy();
             case COMPAT -> compat();
             case TOOLS -> tools();
             case ARMOR -> armor();
@@ -253,6 +263,102 @@ public final class ModRecipePages {
                 ModItems.CATALYST_ORE_IRON.get(), ModItems.CATALYST_IRON.get(), ModItems.INGOT_IRON.get()
         ), "gui.worlds_with_ores.book.compat.machines.hint"));
         return list;
+    }
+
+    private static List<Page> energy() {
+        List<Page> list = new ArrayList<>();
+        list.add(Page.info("gui.worlds_with_ores.book.energy.intro.title", icons(
+                ModItems.FLUX_CORE.get(),
+                ModItems.FLUX_CONTROLLER.get(),
+                ModItems.FLUX_BATTERY.get(),
+                ModItems.FLUX_CHARGER.get()
+        ), "gui.worlds_with_ores.book.energy.intro.hint"));
+        list.add(Page.multiblock("gui.worlds_with_ores.book.energy.reactor.title", reactorLayers(),
+                "gui.worlds_with_ores.book.energy.reactor.hint"));
+        list.add(Page.info("gui.worlds_with_ores.book.energy.tiers.title", icons(
+                ModItems.FLUX_COIL.get(),
+                ModItems.FLUX_COIL_UPGRADE_ADVANCED.get(),
+                ModItems.FLUX_COIL_UPGRADE_QUANTUM.get()
+        ), "gui.worlds_with_ores.book.energy.tiers.hint"));
+        list.add(Page.info("gui.worlds_with_ores.book.energy.cooling.title", icons(
+                ModItems.FLUX_COOLANT_CELL.get(),
+                ModItems.FLUX_ENERGY_PORT.get(),
+                ModItems.FLUX_GLASS.get()
+        ), "gui.worlds_with_ores.book.energy.cooling.hint"));
+        list.add(Page.info("gui.worlds_with_ores.book.energy.modules.title", icons(
+                ModItems.FLUX_MODULE_OUTPUT.get(),
+                ModItems.FLUX_MODULE_EFFICIENCY.get(),
+                ModItems.FLUX_MODULE_COOLING.get(),
+                ModItems.FLUX_MODULE_CAPACITY.get()
+        ), "gui.worlds_with_ores.book.energy.modules.hint"));
+        list.add(Page.info("gui.worlds_with_ores.book.energy.hologram.title", icons(
+                ModItems.FLUX_CONTROLLER.get(), ModItems.RECIPES_BOOK.get()
+        ), "gui.worlds_with_ores.book.energy.hologram.hint"));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.controller", shaped(
+                ModItems.FLUX_CASING.get(), ModItems.FLUX_COIL.get(), ModItems.FLUX_CASING.get(),
+                ModItems.FLUX_COIL.get(), ModItems.FLUX_CORE.get(), ModItems.FLUX_COIL.get(),
+                ModItems.FLUX_CASING.get(), ModItems.FLUX_COIL.get(), ModItems.FLUX_CASING.get()
+        ), i(ModItems.FLUX_CONTROLLER.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.glass", shaped(
+                ModItems.FLUX_CASING.get(), Items.TINTED_GLASS, ModItems.FLUX_CASING.get(),
+                Items.TINTED_GLASS, Items.TINTED_GLASS, Items.TINTED_GLASS,
+                ModItems.FLUX_CASING.get(), Items.TINTED_GLASS, ModItems.FLUX_CASING.get()
+        ), i(ModItems.FLUX_GLASS.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.port", shaped(
+                ModItems.FLUX_CASING.get(), ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CASING.get(),
+                ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CORE.get(), ModItems.INGOT_REDSTONE.get(),
+                ModItems.FLUX_CASING.get(), ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CASING.get()
+        ), i(ModItems.FLUX_ENERGY_PORT.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.coolant", shaped(
+                null, Items.IRON_INGOT, null,
+                Items.SNOW_BLOCK, Items.WATER_BUCKET, Items.SNOW_BLOCK,
+                null, Items.IRON_INGOT, null
+        ), i(ModItems.FLUX_COOLANT_CELL.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.upgrade_advanced", shaped(
+                Items.COPPER_INGOT, ModItems.INGOT_REDSTONE.get(), Items.COPPER_INGOT,
+                ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CORE.get(), ModItems.INGOT_REDSTONE.get(),
+                Items.COPPER_INGOT, ModItems.INGOT_REDSTONE.get(), Items.COPPER_INGOT
+        ), i(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.upgrade_quantum", shaped(
+                Items.AMETHYST_SHARD, Items.DIAMOND, Items.AMETHYST_SHARD,
+                Items.DIAMOND, ModItems.FLUX_COIL_UPGRADE_ADVANCED.get(), Items.DIAMOND,
+                Items.AMETHYST_SHARD, Items.DIAMOND, Items.AMETHYST_SHARD
+        ), i(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.battery", shaped(
+                ModItems.FLUX_CASING.get(), ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CASING.get(),
+                ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CORE.get(), ModItems.INGOT_REDSTONE.get(),
+                ModItems.FLUX_CASING.get(), ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CASING.get()
+        ), i(ModItems.FLUX_BATTERY.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.charger", shaped(
+                ModItems.FLUX_CASING.get(), ModItems.FLUX_COIL.get(), ModItems.FLUX_CASING.get(),
+                ModItems.FLUX_CASING.get(), Items.DIAMOND, ModItems.FLUX_CASING.get(),
+                ModItems.FLUX_CASING.get(), ModItems.FLUX_COIL.get(), ModItems.FLUX_CASING.get()
+        ), i(ModItems.FLUX_CHARGER.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.pickaxe", shaped(
+                ModItems.FLUX_CORE.get(), ModItems.FLUX_CORE.get(), ModItems.FLUX_CORE.get(),
+                null, Items.STICK, null,
+                null, Items.STICK, null
+        ), i(ModItems.PORTAL_FLUX_PICKAXE.get()), "gui.worlds_with_ores.book.energy.pickaxe.hint"));
+        return list;
+    }
+
+    private static ItemStack[] reactorLayers() {
+        ItemStack[] result = new ItemStack[125];
+        for (FluxMultiblock.BlueprintCell cell : FluxMultiblock.blueprint(Direction.NORTH)) {
+            int x = cell.offset().getX();
+            int y = cell.offset().getY();
+            int z = cell.offset().getZ();
+            int index = (y + 2) * 25 + (z + 2) * 5 + (x + 2);
+            result[index] = switch (cell.role()) {
+                case AIR -> ItemStack.EMPTY;
+                case CASING -> i(ModItems.FLUX_CASING.get());
+                case GLASS -> i(ModItems.FLUX_GLASS.get());
+                case COIL -> i(ModItems.FLUX_COIL.get());
+                case CONTROLLER -> i(ModItems.FLUX_CONTROLLER.get());
+                case PORT -> i(ModItems.FLUX_ENERGY_PORT.get());
+            };
+        }
+        return result;
     }
 
     private static void addCompatOrePage(List<Page> list, String modId, String titleKey, String oreId, String productId) {

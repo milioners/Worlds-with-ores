@@ -1,0 +1,5 @@
+﻿Ore portal dimensions and soft industrial worlds for Forge 1.20.1.
+
+Includes Lava Obsidian tools/armor, decorative netherbrick variants, recipe book, and an early Portal Flux FE power system.
+
+IMPORTANT: Portal Flux Energy (reactor, battery, charger, modules) is marked Work in Progress. It is playable for testing, but expect further balance and UI changes.

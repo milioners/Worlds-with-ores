@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "worlds_with_ores:item/6"
+    "layer0": "worlds_with_ores:item/lava_obsidian_armor_helmet"
   }
 }

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "worlds_with_ores:block/flux_glass" }
+  }
+}

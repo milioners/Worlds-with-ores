@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "worlds_with_ores:block/flux_casing",
+    "up": "worlds_with_ores:block/flux_casing_top",
+    "north": "worlds_with_ores:block/flux_energy_port",
+    "south": "worlds_with_ores:block/flux_casing",
+    "west": "worlds_with_ores:block/flux_casing",
+    "east": "worlds_with_ores:block/flux_casing",
+    "particle": "worlds_with_ores:block/flux_energy_port"
+  }
+}

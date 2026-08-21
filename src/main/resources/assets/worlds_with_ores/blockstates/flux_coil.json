@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
+    "tier=basic": {
       "model": "worlds_with_ores:block/flux_coil"
+    },
+    "tier=advanced": {
+      "model": "worlds_with_ores:block/flux_coil_advanced"
+    },
+    "tier=quantum": {
+      "model": "worlds_with_ores:block/flux_coil_quantum"
     }
   }
 }

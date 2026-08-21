@@ -6,6 +6,7 @@ import net.millioners.worldswithores.registry.ModCreativeTabs;
 import net.millioners.worldswithores.registry.ModFeatures;
 import net.millioners.worldswithores.registry.ModItems;
 import net.millioners.worldswithores.registry.ModMenus;
+import net.millioners.worldswithores.registry.ModSounds;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +27,7 @@ public class WorldsWithOresMod {
         ModMenus.MENUS.register(modBus);
         ModCreativeTabs.CREATIVE_TABS.register(modBus);
         ModFeatures.FEATURES.register(modBus);
+        ModSounds.SOUNDS.register(modBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
 }

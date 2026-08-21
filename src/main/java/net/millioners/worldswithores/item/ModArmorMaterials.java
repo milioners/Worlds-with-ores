@@ -14,7 +14,7 @@ import java.util.EnumMap;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    LAVA_OBSIDIAN("lava_obsidian_", 45, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+    LAVA_OBSIDIAN("lava_obsidian", 45, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 5);
         map.put(ArmorItem.Type.LEGGINGS, 8);
         map.put(ArmorItem.Type.CHESTPLATE, 10);

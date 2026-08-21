@@ -10,6 +10,8 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.block.Blocks;
 import net.millioners.worldswithores.WorldsWithOresMod;
+import net.millioners.worldswithores.item.FluxTooltipBlockItem;
+import net.millioners.worldswithores.item.FluxTooltipItem;
 import net.millioners.worldswithores.item.ModArmorMaterials;
 import net.millioners.worldswithores.item.ModTiers;
 import net.millioners.worldswithores.item.PortalFluxPickaxeItem;
@@ -26,6 +28,12 @@ public class ModItems {
 
     private static RegistryObject<Item> blockItem(String name, RegistryObject<? extends net.minecraft.world.level.block.Block> block) {
         return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static RegistryObject<Item> fluxBlockItem(String name,
+                                                     RegistryObject<? extends net.minecraft.world.level.block.Block> block,
+                                                     String hintKey) {
+        return ITEMS.register(name, () -> new FluxTooltipBlockItem(block.get(), new Item.Properties(), hintKey));
     }
 
     public static final RegistryObject<Item> NETHERBRICKBRINSTAR = blockItem("netherbrickbrinstar", ModBlocks.NETHERBRICKBRINSTAR);
@@ -94,14 +102,37 @@ public class ModItems {
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
                     SoftFrames.only("ae2:quartz_block"), ModBlocks.CERTUSWORLD_PORTAL));
 
-    public static final RegistryObject<Item> FLUX_CASING = blockItem("flux_casing", ModBlocks.FLUX_CASING);
-    public static final RegistryObject<Item> FLUX_COIL = blockItem("flux_coil", ModBlocks.FLUX_COIL);
-    public static final RegistryObject<Item> FLUX_CONTROLLER = blockItem("flux_controller", ModBlocks.FLUX_CONTROLLER);
-    public static final RegistryObject<Item> FLUX_BATTERY = blockItem("flux_battery", ModBlocks.FLUX_BATTERY);
-    public static final RegistryObject<Item> FLUX_CHARGER = blockItem("flux_charger", ModBlocks.FLUX_CHARGER);
+    public static final RegistryObject<Item> FLUX_CASING = fluxBlockItem("flux_casing", ModBlocks.FLUX_CASING,
+            "tooltip.worlds_with_ores.flux_casing");
+    public static final RegistryObject<Item> FLUX_COIL = fluxBlockItem("flux_coil", ModBlocks.FLUX_COIL,
+            "tooltip.worlds_with_ores.flux_coil");
+    public static final RegistryObject<Item> FLUX_GLASS = fluxBlockItem("flux_glass", ModBlocks.FLUX_GLASS,
+            "tooltip.worlds_with_ores.flux_glass");
+    public static final RegistryObject<Item> FLUX_ENERGY_PORT = fluxBlockItem("flux_energy_port", ModBlocks.FLUX_ENERGY_PORT,
+            "tooltip.worlds_with_ores.flux_energy_port");
+    public static final RegistryObject<Item> FLUX_CONTROLLER = fluxBlockItem("flux_controller", ModBlocks.FLUX_CONTROLLER,
+            "tooltip.worlds_with_ores.flux_controller");
+    public static final RegistryObject<Item> FLUX_BATTERY = fluxBlockItem("flux_battery", ModBlocks.FLUX_BATTERY,
+            "tooltip.worlds_with_ores.flux_battery");
+    public static final RegistryObject<Item> FLUX_CHARGER = fluxBlockItem("flux_charger", ModBlocks.FLUX_CHARGER,
+            "tooltip.worlds_with_ores.flux_charger");
 
     public static final RegistryObject<Item> FLUX_CORE = ITEMS.register("flux_core",
-            () -> new Item(new Item.Properties().stacksTo(16)));
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_core"));
+    public static final RegistryObject<Item> FLUX_COOLANT_CELL = ITEMS.register("flux_coolant_cell",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_coolant_cell"));
+    public static final RegistryObject<Item> FLUX_COIL_UPGRADE_ADVANCED = ITEMS.register("flux_coil_upgrade_advanced",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_coil_upgrade_advanced"));
+    public static final RegistryObject<Item> FLUX_COIL_UPGRADE_QUANTUM = ITEMS.register("flux_coil_upgrade_quantum",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_coil_upgrade_quantum"));
+    public static final RegistryObject<Item> FLUX_MODULE_OUTPUT = ITEMS.register("flux_module_output",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_output"));
+    public static final RegistryObject<Item> FLUX_MODULE_EFFICIENCY = ITEMS.register("flux_module_efficiency",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_efficiency"));
+    public static final RegistryObject<Item> FLUX_MODULE_COOLING = ITEMS.register("flux_module_cooling",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_cooling"));
+    public static final RegistryObject<Item> FLUX_MODULE_CAPACITY = ITEMS.register("flux_module_capacity",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_capacity"));
     public static final RegistryObject<Item> PORTAL_FLUX_PICKAXE = ITEMS.register("portal_flux_pickaxe",
             PortalFluxPickaxeItem::new);
 

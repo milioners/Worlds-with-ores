@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CGC", "GGG", "CGC"],
+  "key": {
+    "C": { "item": "worlds_with_ores:flux_casing" },
+    "G": { "item": "minecraft:tinted_glass" }
+  },
+  "result": { "item": "worlds_with_ores:flux_glass", "count": 8 }
+}

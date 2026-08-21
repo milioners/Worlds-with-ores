@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["DCD","CKC","DCD"],"key":{"D":{"item":"minecraft:diamond"},"C":{"item":"worlds_with_ores:flux_casing"},"K":{"item":"worlds_with_ores:flux_core"}},"result":{"item":"worlds_with_ores:flux_module_capacity"}}

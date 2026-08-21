@@ -120,11 +120,14 @@ public class RecipeBookScreen extends Screen {
             case SMELTING -> renderSmelting(graphics, page, contentX, mouseX, mouseY);
             case INFO -> renderInfo(graphics, page, contentX, mouseX, mouseY);
             case PORTAL -> renderPortal(graphics, page, contentX, mouseX, mouseY, partialTick);
+            case MULTIBLOCK -> renderMultiblock(graphics, page, contentX, mouseX, mouseY);
             default -> renderCrafting(graphics, page, contentX, mouseX, mouseY);
         }
 
         if (!page.hint().getString().isEmpty() && page.kind() != ModRecipePages.Kind.INFO) {
-            int hintY = page.kind() == ModRecipePages.Kind.PORTAL ? this.top + 178 : this.top + 168;
+            int hintY = page.kind() == ModRecipePages.Kind.PORTAL ? this.top + 178
+                    : page.kind() == ModRecipePages.Kind.MULTIBLOCK ? this.top + 146
+                    : this.top + 168;
             drawWrapped(graphics, page.hint(), contentX, hintY, PANEL_W - TAB_W - 44, COL_MUTED);
         }
 
@@ -163,6 +166,39 @@ public class RecipeBookScreen extends Screen {
         }
         if (!page.result().isEmpty() && mouseX >= rx && mouseX < rx + 28 && mouseY >= this.top + 128 && mouseY < this.top + 156) {
             graphics.renderTooltip(this.font, page.result(), mouseX, mouseY);
+        }
+    }
+
+    private void renderMultiblock(GuiGraphics graphics, ModRecipePages.Page page, int contentX, int mouseX, int mouseY) {
+        int startX = contentX;
+        int baseY = this.top + 66;
+        int cell = 9;
+        int layerWidth = cell * 5;
+        for (int layer = 0; layer < 5; layer++) {
+            int layerX = startX + layer * (layerWidth + 3);
+            graphics.drawCenteredString(this.font,
+                    Component.translatable("gui.worlds_with_ores.book.energy.layer." + layer),
+                    layerX + layerWidth / 2, baseY - 12, COL_MUTED);
+            for (int row = 0; row < 5; row++) {
+                for (int col = 0; col < 5; col++) {
+                    int index = layer * 25 + row * 5 + col;
+                    int sx = layerX + col * cell;
+                    int sy = baseY + row * cell;
+                    drawSlot(graphics, sx, sy, 8);
+                    ItemStack stack = page.pattern().length > index ? page.pattern()[index] : ItemStack.EMPTY;
+                    if (!stack.isEmpty()) {
+                        PoseStack pose = graphics.pose();
+                        pose.pushPose();
+                        pose.translate(sx, sy, 100.0F);
+                        pose.scale(0.5F, 0.5F, 0.5F);
+                        graphics.renderItem(stack, 0, 0);
+                        pose.popPose();
+                    }
+                    if (!stack.isEmpty() && mouseX >= sx && mouseX < sx + 8 && mouseY >= sy && mouseY < sy + 8) {
+                        graphics.renderTooltip(this.font, stack, mouseX, mouseY);
+                    }
+                }
+            }
         }
     }
 

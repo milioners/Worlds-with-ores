@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["GEG","EKE","GEG"],"key":{"G":{"item":"minecraft:gold_ingot"},"E":{"item":"worlds_with_ores:ingot_emerald"},"K":{"item":"worlds_with_ores:flux_core"}},"result":{"item":"worlds_with_ores:flux_module_efficiency"}}

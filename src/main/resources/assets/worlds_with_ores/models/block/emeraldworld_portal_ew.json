@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "worlds_with_ores:block/emerald_ore_emerald",
-    "portal": "worlds_with_ores:block/emerald_ore_emerald"
+    "particle": "worlds_with_ores:block/portal_panel_emerald",
+    "portal": "worlds_with_ores:block/portal_panel_emerald"
   },
   "elements": [
     {

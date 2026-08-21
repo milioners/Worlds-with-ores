@@ -64,6 +64,8 @@ public class PortalFluxPickaxeItem extends PickaxeItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tip, TooltipFlag flag) {
+        tip.add(Component.translatable("tooltip.worlds_with_ores.energy_wip")
+                .withStyle(net.minecraft.ChatFormatting.GOLD));
         tip.add(Component.translatable("item.worlds_with_ores.portal_flux_pickaxe.energy",
                 ItemEnergy.getEnergy(stack), CAPACITY));
     }

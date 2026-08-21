@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "worlds_with_ores:block/redstone_ore_portal",
-    "portal": "worlds_with_ores:block/redstone_ore_portal"
+    "particle": "worlds_with_ores:block/portal_panel_redstone",
+    "portal": "worlds_with_ores:block/portal_panel_redstone"
   },
   "elements": [
     {

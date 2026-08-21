@@ -68,10 +68,19 @@ public class ModCreativeTabs {
 
                         output.accept(ModItems.FLUX_CASING.get());
                         output.accept(ModItems.FLUX_COIL.get());
+                        output.accept(ModItems.FLUX_GLASS.get());
+                        output.accept(ModItems.FLUX_ENERGY_PORT.get());
                         output.accept(ModItems.FLUX_CONTROLLER.get());
                         output.accept(ModItems.FLUX_BATTERY.get());
                         output.accept(ModItems.FLUX_CHARGER.get());
                         output.accept(ModItems.FLUX_CORE.get());
+                        output.accept(ModItems.FLUX_COOLANT_CELL.get());
+                        output.accept(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get());
+                        output.accept(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get());
+                        output.accept(ModItems.FLUX_MODULE_OUTPUT.get());
+                        output.accept(ModItems.FLUX_MODULE_EFFICIENCY.get());
+                        output.accept(ModItems.FLUX_MODULE_COOLING.get());
+                        output.accept(ModItems.FLUX_MODULE_CAPACITY.get());
                         output.accept(ModItems.PORTAL_FLUX_PICKAXE.get());
 
                         output.accept(ModItems.NETHERBRICKBRINSTAR.get());

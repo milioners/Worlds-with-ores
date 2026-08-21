@@ -5,6 +5,7 @@ import net.millioners.worldswithores.WorldsWithOresMod;
 import net.millioners.worldswithores.blockentity.FluxBatteryBlockEntity;
 import net.millioners.worldswithores.blockentity.FluxChargerBlockEntity;
 import net.millioners.worldswithores.blockentity.FluxControllerBlockEntity;
+import net.millioners.worldswithores.blockentity.FluxEnergyPortBlockEntity;
 import net.millioners.worldswithores.blockentity.ModChestBlockEntity;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +22,10 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<FluxControllerBlockEntity>> FLUX_CONTROLLER =
             BLOCK_ENTITIES.register("flux_controller",
                     () -> BlockEntityType.Builder.of(FluxControllerBlockEntity::new, ModBlocks.FLUX_CONTROLLER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FluxEnergyPortBlockEntity>> FLUX_ENERGY_PORT =
+            BLOCK_ENTITIES.register("flux_energy_port",
+                    () -> BlockEntityType.Builder.of(FluxEnergyPortBlockEntity::new, ModBlocks.FLUX_ENERGY_PORT.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<FluxBatteryBlockEntity>> FLUX_BATTERY =
             BLOCK_ENTITIES.register("flux_battery",

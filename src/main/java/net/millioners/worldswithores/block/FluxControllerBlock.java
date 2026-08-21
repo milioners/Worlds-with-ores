@@ -89,22 +89,39 @@ public class FluxControllerBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (!state.getValue(LIT)) {
+        if (!state.getValue(FORMED)) {
             return;
         }
-        double x = pos.getX() + 0.5D;
+        Direction inward = state.getValue(FACING).getOpposite();
+        double x = pos.getX() + 0.5D + inward.getStepX() * 2.0D;
         double y = pos.getY() + 0.5D;
-        double z = pos.getZ() + 0.5D;
-        for (int i = 0; i < 3; i++) {
-            level.addParticle(ParticleTypes.END_ROD,
+        double z = pos.getZ() + 0.5D + inward.getStepZ() * 2.0D;
+        boolean active = state.getValue(LIT);
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        boolean overheated = blockEntity instanceof FluxControllerBlockEntity controller && controller.isOverheated();
+        int count = active ? 5 : 2;
+        for (int i = 0; i < count; i++) {
+            level.addParticle(overheated ? ParticleTypes.FLAME : ParticleTypes.ELECTRIC_SPARK,
                     x + (random.nextDouble() - 0.5D) * 0.6D,
                     y + (random.nextDouble() - 0.5D) * 0.6D,
                     z + (random.nextDouble() - 0.5D) * 0.6D,
-                    0.0D, 0.02D, 0.0D);
+                    (random.nextDouble() - 0.5D) * 0.04D,
+                    random.nextDouble() * 0.04D,
+                    (random.nextDouble() - 0.5D) * 0.04D);
         }
-        if (random.nextFloat() < 0.35F) {
+        if (active && random.nextFloat() < 0.55F) {
             level.addParticle(ParticleTypes.ENCHANT, x, y + 0.4D, z,
-                    (random.nextDouble() - 0.5D) * 0.5D, 0.2D, (random.nextDouble() - 0.5D) * 0.5D);
+                    (random.nextDouble() - 0.5D) * 0.8D, 0.3D, (random.nextDouble() - 0.5D) * 0.8D);
+        }
+        if (active && random.nextFloat() < 0.45F) {
+            boolean sideCoil = random.nextBoolean();
+            int sign = random.nextBoolean() ? 2 : -2;
+            Direction side = state.getValue(FACING).getClockWise();
+            double sourceX = sideCoil ? x + side.getStepX() * sign : x;
+            double sourceY = sideCoil ? y : y + sign;
+            double sourceZ = sideCoil ? z + side.getStepZ() * sign : z;
+            level.addParticle(ParticleTypes.END_ROD, sourceX, sourceY, sourceZ,
+                    (x - sourceX) * 0.08D, (y - sourceY) * 0.08D, (z - sourceZ) * 0.08D);
         }
     }
 

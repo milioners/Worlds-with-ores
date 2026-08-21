@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "worlds_with_ores:block/flux_energy_port" },
+    "facing=east": { "model": "worlds_with_ores:block/flux_energy_port", "y": 90 },
+    "facing=south": { "model": "worlds_with_ores:block/flux_energy_port", "y": 180 },
+    "facing=west": { "model": "worlds_with_ores:block/flux_energy_port", "y": 270 }
+  }
+}

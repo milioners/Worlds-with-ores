@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.millioners.worldswithores.util.SoftFrames;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
@@ -28,7 +29,9 @@ public class SoftTerrainFillFeature extends Feature<SoftTerrainFillFeature.Confi
     @Override
     public boolean place(FeaturePlaceContext<Config> context) {
         Config config = context.config();
-        Block oreBlock = ForgeRegistries.BLOCKS.getValue(config.ore);
+        // Prefer the industrial ore; if the soft dependency is missing, keep solid terrain
+        // instead of leaving sparse nether-noise stone for decorative veins to shred.
+        Block oreBlock = SoftFrames.resolve(config.ore.toString(), () -> Blocks.CALCITE);
         if (oreBlock == null || oreBlock == Blocks.AIR) {
             return false;
         }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "worlds_with_ores:item/flux_coil_upgrade_quantum"
+  }
+}

@@ -37,6 +37,7 @@ public class ClientSetup {
             setPortalLayer(ModBlocks.YELLORIUMWORLD_PORTAL.get());
             setPortalLayer(ModBlocks.CERTUSWORLD_PORTAL.get());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.FLUX_COIL.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.FLUX_GLASS.get(), RenderType.translucent());
         });
     }
 
