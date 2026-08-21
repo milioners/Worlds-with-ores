@@ -249,7 +249,7 @@
   "gui.worlds_with_ores.book.energy.layer.4": "Top",
   "tooltip.worlds_with_ores.energy_wip": "Portal Flux Energy: Work in Progress",
   "tooltip.worlds_with_ores.flux_casing": "Reactor frame block for the 5x5x5 multiblock.",
-  "tooltip.worlds_with_ores.flux_coil": "Place 4 coils on face centers. Right-click with upgrades to raise tier.",
+  "tooltip.worlds_with_ores.flux_coil": "Face-center coil. Right-click with upgrades (or any reactor part). Weakest coil sets reactor tier.",
   "tooltip.worlds_with_ores.flux_glass": "Face panels of the hollow reactor chamber.",
   "tooltip.worlds_with_ores.flux_energy_port": "Rear output port. Connect FE cables here.",
   "tooltip.worlds_with_ores.flux_controller": "Front controller. Opens the reactor GUI.",
@@ -257,8 +257,8 @@
   "tooltip.worlds_with_ores.flux_charger": "Charges energy tools from FE.",
   "tooltip.worlds_with_ores.flux_core": "Crafting component for Portal Flux machines.",
   "tooltip.worlds_with_ores.flux_coolant_cell": "Put in the reactor coolant slot. Consumed automatically when hot.",
-  "tooltip.worlds_with_ores.flux_coil_upgrade_advanced": "Right-click a BASIC Flux Coil (T1 -> T2, 320 FE/t). Upgrade all 4 coils.",
-  "tooltip.worlds_with_ores.flux_coil_upgrade_quantum": "Right-click an ADVANCED Flux Coil (T2 -> T3, 640 FE/t). Upgrade all 4 coils.",
+  "tooltip.worlds_with_ores.flux_coil_upgrade_advanced": "Right-click ANY reactor part to upgrade all BASIC coils (T1->T2). Shift+click one coil. Need 4 upgrades for full T2.",
+  "tooltip.worlds_with_ores.flux_coil_upgrade_quantum": "Right-click ANY reactor part to upgrade all ADVANCED coils (T2->T3). Shift+click one coil. Need 4 upgrades for full T3.",
   "tooltip.worlds_with_ores.flux_module_output": "Reactor module: +25% FE/t (also more heat).",
   "tooltip.worlds_with_ores.flux_module_efficiency": "Reactor module: +25% fuel lifetime.",
   "tooltip.worlds_with_ores.flux_module_cooling": "Reactor module: +5 heat dissipation / tick.",
@@ -268,5 +268,11 @@
   "message.worlds_with_ores.coil.need_advanced": "Use Advanced Coil Upgrade on a BASIC coil (T1).",
   "message.worlds_with_ores.coil.need_quantum": "Use Quantum Coil Upgrade on an ADVANCED coil (T2).",
   "gui.worlds_with_ores.flux.wip": "WIP",
-  "gui.worlds_with_ores.flux.modules": "Modules"
+  "gui.worlds_with_ores.flux.modules": "Modules",
+  "message.worlds_with_ores.coil.upgraded_count": "Upgraded %s coil(s) to %s (reactor T%s)",
+  "message.worlds_with_ores.coil.none_nearby": "No Flux Coils nearby. Place 4 coils on the reactor face centers.",
+  "message.worlds_with_ores.coil.need_basic_nearby": "No BASIC coils to upgrade. Use Advanced Upgrade on T1 coils.",
+  "message.worlds_with_ores.coil.need_advanced_nearby": "No ADVANCED coils to upgrade. First upgrade BASIC coils to T2.",
+  "message.worlds_with_ores.coil.no_controller": "No Flux Reactor controller nearby.",
+  "gui.worlds_with_ores.flux.coil_hint": "Coils: PKM upgrade on any part (Shift = one coil)"
 }

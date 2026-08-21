@@ -2,8 +2,16 @@ package net.millioners.worldswithores.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -13,9 +21,11 @@ import net.millioners.worldswithores.block.FluxCoilTier;
 import net.millioners.worldswithores.block.FluxControllerBlock;
 import net.millioners.worldswithores.block.FluxEnergyPortBlock;
 import net.millioners.worldswithores.registry.ModBlocks;
+import net.millioners.worldswithores.registry.ModItems;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -55,23 +65,148 @@ public final class FluxMultiblock {
 
     private FluxMultiblock() {}
 
+    /**
+     * Shared interaction for any reactor part: apply coil upgrades first, otherwise open GUI
+     * (even when the structure is still incomplete).
+     */
+    public static InteractionResult interact(Level level, BlockPos partPos, Player player, InteractionHand hand) {
+        ItemStack held = player.getItemInHand(hand);
+        if (isCoilUpgrade(held)) {
+            if (!level.isClientSide) {
+                applyCoilUpgrade(level, partPos, player, held, player.isShiftKeyDown());
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        openController(level, partPos, player);
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    public static boolean isCoilUpgrade(ItemStack stack) {
+        return stack.is(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get())
+                || stack.is(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get());
+    }
+
     public static boolean openController(Level level, BlockPos partPos, Player player) {
         if (level.isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
             return false;
         }
+        BlockPos controllerPos = findController(level, partPos);
+        if (controllerPos == null) {
+            player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.no_controller"), true);
+            return false;
+        }
+        if (level.getBlockEntity(controllerPos) instanceof FluxControllerBlockEntity controller) {
+            NetworkHooks.openScreen(serverPlayer, controller, controllerPos);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param singleCoilOnly when true (sneak), upgrade only the clicked coil if it is a coil
+     */
+    public static int applyCoilUpgrade(Level level, BlockPos origin, Player player, ItemStack upgrade, boolean singleCoilOnly) {
+        FluxCoilTier required = upgrade.is(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get())
+                ? FluxCoilTier.BASIC
+                : upgrade.is(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get())
+                ? FluxCoilTier.ADVANCED
+                : null;
+        if (required == null || upgrade.isEmpty()) {
+            return 0;
+        }
+        FluxCoilTier next = required.next();
+
+        List<BlockPos> coils = findCoils(level, origin);
+        if (singleCoilOnly && level.getBlockState(origin).is(ModBlocks.FLUX_COIL.get())) {
+            coils = List.of(origin);
+        }
+        coils.sort(Comparator.comparingDouble(pos -> pos.distSqr(origin)));
+
+        int upgraded = 0;
+        for (BlockPos coilPos : coils) {
+            if (upgrade.isEmpty()) {
+                break;
+            }
+            BlockState state = level.getBlockState(coilPos);
+            if (!state.is(ModBlocks.FLUX_COIL.get()) || !state.hasProperty(FluxCoilBlock.TIER)) {
+                continue;
+            }
+            FluxCoilTier tier = state.getValue(FluxCoilBlock.TIER);
+            if (tier != required) {
+                continue;
+            }
+            level.setBlock(coilPos, state.setValue(FluxCoilBlock.TIER, next), Block.UPDATE_ALL);
+            if (!player.getAbilities().instabuild) {
+                upgrade.shrink(1);
+            }
+            upgraded++;
+            level.playSound(null, coilPos, SoundEvents.SMITHING_TABLE_USE, SoundSource.BLOCKS, 0.9F, 1.15F);
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.sendParticles(ParticleTypes.END_ROD,
+                        coilPos.getX() + 0.5D, coilPos.getY() + 1.0D, coilPos.getZ() + 0.5D,
+                        10, 0.25D, 0.2D, 0.25D, 0.02D);
+            }
+        }
+
+        if (upgraded > 0) {
+            BlockPos controllerPos = findController(level, origin);
+            FluxCoilTier reactorTier = controllerPos != null ? getTier(level, controllerPos) : next;
+            player.displayClientMessage(Component.translatable(
+                    "message.worlds_with_ores.coil.upgraded_count",
+                    upgraded, next.getSerializedName().toUpperCase(), reactorTier.ordinal() + 1), true);
+        } else if (coils.isEmpty()) {
+            player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.none_nearby"), true);
+        } else if (required == FluxCoilTier.BASIC) {
+            player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.need_basic_nearby"), true);
+        } else {
+            boolean anyQuantum = coils.stream().anyMatch(pos ->
+                    level.getBlockState(pos).hasProperty(FluxCoilBlock.TIER)
+                            && level.getBlockState(pos).getValue(FluxCoilBlock.TIER) == FluxCoilTier.QUANTUM);
+            if (anyQuantum && coils.stream().allMatch(pos ->
+                    !level.getBlockState(pos).hasProperty(FluxCoilBlock.TIER)
+                            || level.getBlockState(pos).getValue(FluxCoilBlock.TIER) == FluxCoilTier.QUANTUM)) {
+                player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.max"), true);
+            } else {
+                player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.need_advanced_nearby"), true);
+            }
+        }
+        return upgraded;
+    }
+
+    public static List<BlockPos> findCoils(Level level, BlockPos near) {
+        BlockPos controllerPos = findController(level, near);
+        List<BlockPos> coils = new ArrayList<>(4);
+        if (controllerPos != null) {
+            BlockState controllerState = level.getBlockState(controllerPos);
+            if (controllerState.hasProperty(FluxControllerBlock.FACING)) {
+                Direction outward = controllerState.getValue(FluxControllerBlock.FACING);
+                Direction side = outward.getClockWise();
+                BlockPos center = getCenter(controllerPos, outward);
+                BlockPos[] expected = {
+                        center.above(RADIUS), center.below(RADIUS),
+                        center.relative(side, RADIUS), center.relative(side.getOpposite(), RADIUS)
+                };
+                for (BlockPos coil : expected) {
+                    if (level.getBlockState(coil).is(ModBlocks.FLUX_COIL.get())) {
+                        coils.add(coil);
+                    }
+                }
+                if (!coils.isEmpty()) {
+                    return coils;
+                }
+            }
+        }
         for (int dx = -4; dx <= 4; dx++) {
             for (int dy = -4; dy <= 4; dy++) {
                 for (int dz = -4; dz <= 4; dz++) {
-                    BlockPos check = partPos.offset(dx, dy, dz);
-                    if (level.getBlockEntity(check) instanceof FluxControllerBlockEntity controller
-                            && isValid(level, check)) {
-                        NetworkHooks.openScreen(serverPlayer, controller, check);
-                        return true;
+                    BlockPos check = near.offset(dx, dy, dz);
+                    if (level.getBlockState(check).is(ModBlocks.FLUX_COIL.get())) {
+                        coils.add(check.immutable());
                     }
                 }
             }
         }
-        return false;
+        return coils;
     }
 
     public static boolean isValid(Level level, BlockPos controllerPos) {
@@ -183,18 +318,23 @@ public final class FluxMultiblock {
     }
 
     public static BlockPos findController(Level level, BlockPos near) {
+        BlockPos fallback = null;
         for (int dx = -4; dx <= 4; dx++) {
             for (int dy = -4; dy <= 4; dy++) {
                 for (int dz = -4; dz <= 4; dz++) {
                     BlockPos check = near.offset(dx, dy, dz);
-                    if (level.getBlockEntity(check) instanceof FluxControllerBlockEntity
-                            && isValid(level, check)) {
-                        return check;
+                    if (level.getBlockEntity(check) instanceof FluxControllerBlockEntity) {
+                        if (isValid(level, check)) {
+                            return check;
+                        }
+                        if (fallback == null) {
+                            fallback = check;
+                        }
                     }
                 }
             }
         }
-        return null;
+        return fallback;
     }
 
     public static void notifyNeighbors(Level level, BlockPos controllerPos) {

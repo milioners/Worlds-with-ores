@@ -187,6 +187,8 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
 
         graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.energy"), 94, 30, COL_MUTED, false);
         graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.heat"), 94, 56, COL_MUTED, false);
+        graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.coil_hint"),
+                94, 116, COL_MUTED, false);
         if (this.menu.getData().get(18) > 0) {
             var mismatch = this.menu.getController().getFirstMismatch();
             if (mismatch != null) {

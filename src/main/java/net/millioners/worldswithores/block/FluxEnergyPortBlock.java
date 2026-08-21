@@ -61,7 +61,6 @@ public class FluxEnergyPortBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
                                  InteractionHand hand, BlockHitResult hit) {
-        boolean opened = FluxMultiblock.openController(level, pos, player);
-        return opened ? InteractionResult.CONSUME : InteractionResult.sidedSuccess(level.isClientSide);
+        return FluxMultiblock.interact(level, pos, player, hand);
     }
 }

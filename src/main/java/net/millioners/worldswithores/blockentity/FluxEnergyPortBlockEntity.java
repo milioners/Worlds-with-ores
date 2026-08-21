@@ -24,16 +24,14 @@ public class FluxEnergyPortBlockEntity extends BlockEntity {
                     && cached.isFormed()) {
                 return cached.getEnergyStorage();
             }
-            controllerPos = null;
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                BlockPos candidate = worldPosition.relative(direction, 4);
-                if (level.getBlockEntity(candidate) instanceof FluxControllerBlockEntity controller
-                        && FluxMultiblock.isValid(level, candidate)) {
-                    controllerPos = candidate.immutable();
-                    setChanged();
-                    return controller.getEnergyStorage();
-                }
+            controllerPos = FluxMultiblock.findController(level, worldPosition);
+            if (controllerPos != null
+                    && level.getBlockEntity(controllerPos) instanceof FluxControllerBlockEntity controller
+                    && controller.isFormed()) {
+                setChanged();
+                return controller.getEnergyStorage();
             }
+            controllerPos = null;
             return null;
         }
 

@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.millioners.worldswithores.blockentity.FluxControllerBlockEntity;
+import net.millioners.worldswithores.blockentity.FluxMultiblock;
 import net.millioners.worldswithores.registry.ModBlockEntities;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
@@ -78,6 +79,9 @@ public class FluxControllerBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (FluxMultiblock.isCoilUpgrade(player.getItemInHand(hand))) {
+            return FluxMultiblock.interact(level, pos, player, hand);
+        }
         if (!level.isClientSide) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof FluxControllerBlockEntity controller && player instanceof ServerPlayer serverPlayer) {

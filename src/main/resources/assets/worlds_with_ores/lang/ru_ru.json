@@ -249,7 +249,7 @@
   "gui.worlds_with_ores.book.energy.layer.4": "Верх",
   "tooltip.worlds_with_ores.energy_wip": "Portal Flux Energy: в разработке",
   "tooltip.worlds_with_ores.flux_casing": "Корпус реактора для мультиблока 5x5x5.",
-  "tooltip.worlds_with_ores.flux_coil": "Поставьте 4 катушки по центрам граней. ПКМ улучшением повышает тир.",
+  "tooltip.worlds_with_ores.flux_coil": "Катушка на центре грани. ПКМ улучшением (можно по любой части реактора). Самая слабая задаёт тир.",
   "tooltip.worlds_with_ores.flux_glass": "Стекло на гранях полой камеры реактора.",
   "tooltip.worlds_with_ores.flux_energy_port": "Задний порт вывода. Подключайте FE-кабели сюда.",
   "tooltip.worlds_with_ores.flux_controller": "Передний контроллер. Открывает GUI реактора.",
@@ -257,8 +257,8 @@
   "tooltip.worlds_with_ores.flux_charger": "Заряжает энергетические инструменты от FE.",
   "tooltip.worlds_with_ores.flux_core": "Крафтовый компонент машин Portal Flux.",
   "tooltip.worlds_with_ores.flux_coolant_cell": "В слот охлаждения реактора. Тратится автоматически при нагреве.",
-  "tooltip.worlds_with_ores.flux_coil_upgrade_advanced": "ПКМ по BASIC-катушке (T1 -> T2, 320 FE/t). Улучшите все 4 катушки.",
-  "tooltip.worlds_with_ores.flux_coil_upgrade_quantum": "ПКМ по ADVANCED-катушке (T2 -> T3, 640 FE/t). Улучшите все 4 катушки.",
+  "tooltip.worlds_with_ores.flux_coil_upgrade_advanced": "ПКМ по ЛЮБОЙ части реактора — улучшить все BASIC-катушки (T1->T2). Shift+ПКМ — одну. Нужно 4 штуки для полного T2.",
+  "tooltip.worlds_with_ores.flux_coil_upgrade_quantum": "ПКМ по ЛЮБОЙ части реактора — улучшить все ADVANCED-катушки (T2->T3). Shift+ПКМ — одну. Нужно 4 штуки для полного T3.",
   "tooltip.worlds_with_ores.flux_module_output": "Модуль реактора: +25% FE/t (больше нагрева).",
   "tooltip.worlds_with_ores.flux_module_efficiency": "Модуль реактора: +25% к времени топлива.",
   "tooltip.worlds_with_ores.flux_module_cooling": "Модуль реактора: +5 охлаждения / тик.",
@@ -268,5 +268,11 @@
   "message.worlds_with_ores.coil.need_advanced": "Нужен Advanced Coil Upgrade на BASIC-катушку (T1).",
   "message.worlds_with_ores.coil.need_quantum": "Нужен Quantum Coil Upgrade на ADVANCED-катушку (T2).",
   "gui.worlds_with_ores.flux.wip": "WIP",
-  "gui.worlds_with_ores.flux.modules": "Модули"
+  "gui.worlds_with_ores.flux.modules": "Модули",
+  "message.worlds_with_ores.coil.upgraded_count": "Улучшено катушек: %s → %s (реактор T%s)",
+  "message.worlds_with_ores.coil.none_nearby": "Рядом нет Flux Coil. Поставьте 4 катушки по центрам граней.",
+  "message.worlds_with_ores.coil.need_basic_nearby": "Нет BASIC-катушек. Advanced Upgrade работает на T1.",
+  "message.worlds_with_ores.coil.need_advanced_nearby": "Нет ADVANCED-катушек. Сначала улучшите BASIC до T2.",
+  "message.worlds_with_ores.coil.no_controller": "Рядом нет контроллера Flux Reactor.",
+  "gui.worlds_with_ores.flux.coil_hint": "Катушки: ПКМ апгрейдом по любой части (Shift = одна)"
 }
