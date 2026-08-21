@@ -1,7 +1,48 @@
 {
   "type": "worlds_with_ores:soft_terrain_fill",
   "config": {
-    "ore": "mekanism:osmium_ore",
+    "ores": [
+      {
+        "id": "mekanism:osmium_ore",
+        "weight": 40
+      },
+      {
+        "id": "mekanism:deepslate_osmium_ore",
+        "weight": 12
+      },
+      {
+        "id": "mekanism:tin_ore",
+        "weight": 14
+      },
+      {
+        "id": "mekanism:deepslate_tin_ore",
+        "weight": 6
+      },
+      {
+        "id": "mekanism:lead_ore",
+        "weight": 10
+      },
+      {
+        "id": "mekanism:deepslate_lead_ore",
+        "weight": 4
+      },
+      {
+        "id": "mekanism:uranium_ore",
+        "weight": 8
+      },
+      {
+        "id": "mekanism:deepslate_uranium_ore",
+        "weight": 3
+      },
+      {
+        "id": "mekanism:fluorite_ore",
+        "weight": 7
+      },
+      {
+        "id": "mekanism:deepslate_fluorite_ore",
+        "weight": 3
+      }
+    ],
     "replaceables": [
       "minecraft:stone",
       "minecraft:deepslate",

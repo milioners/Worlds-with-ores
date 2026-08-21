@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.millioners.worldswithores.blockentity.FluxModuleType;
 import net.millioners.worldswithores.menu.FluxControllerMenu;
 
 public class FluxControllerScreen extends AbstractContainerScreen<FluxControllerMenu> {
@@ -27,7 +28,7 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
     public FluxControllerScreen(FluxControllerMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
         this.imageWidth = 248;
-        this.imageHeight = 250;
+        this.imageHeight = 270;
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
@@ -38,14 +39,14 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
             final int buttonId = index;
             addRenderableWidget(Button.builder(Component.literal((index + 1) * 25 + "%"),
                             button -> sendMenuButton(buttonId))
-                    .bounds(leftPos + 90 + index * 28, topPos + 132, 26, 14).build());
+                    .bounds(leftPos + 90 + index * 28, topPos + 152, 26, 14).build());
         }
         this.autoButton = addRenderableWidget(Button.builder(Component.empty(), button -> sendMenuButton(4))
-                .bounds(leftPos + 204, topPos + 132, 36, 14).build());
+                .bounds(leftPos + 204, topPos + 152, 36, 14).build());
         this.hologramButton = addRenderableWidget(Button.builder(Component.empty(), button -> {
                     FluxStructureOverlay.cycle(this.menu.getController().getBlockPos());
                     updateButtonLabels();
-                }).bounds(leftPos + 8, topPos + 132, 76, 14).build());
+                }).bounds(leftPos + 8, topPos + 152, 76, 14).build());
         updateButtonLabels();
     }
 
@@ -78,7 +79,6 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
         graphics.fill(x + 1, y + 1, x + this.imageWidth - 1, y + 22, COL_PANEL);
         graphics.fill(x + 1, y + 22, x + this.imageWidth - 1, y + 24, COL_ACCENT);
 
-        // Left machine chamber (fuel / coolant only).
         graphics.fill(x + 8, y + 28, x + 84, y + 100, 0xFF0A0E12);
         graphics.fill(x + 10, y + 30, x + 82, y + 98, 0xFF141E28);
         drawSlotWell(graphics, x + 26, y + 40);
@@ -97,14 +97,12 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
         graphics.fill(cx - 4, cy - 4, cx + 5, cy + 5, core);
         graphics.fill(cx - 1, cy - 1, cx + 2, cy + 2, 0xFFFFFFFF);
 
-        // Module row under the chamber.
-        graphics.fill(x + 8, y + 102, x + 84, y + 128, COL_PANEL);
-        for (int i = 0; i < 4; i++) {
-            drawSlotWell(graphics, x + 10 + i * 20, y + 108);
+        graphics.fill(x + 8, y + 102, x + 84, y + 148, COL_PANEL);
+        for (int i = 0; i < FluxModuleType.SLOT_COUNT; i++) {
+            drawSlotWell(graphics, x + 10 + (i % 4) * 20, y + 108 + (i / 4) * 20);
         }
 
-        // Right telemetry panel.
-        graphics.fill(x + 88, y + 28, x + 240, y + 128, COL_PANEL);
+        graphics.fill(x + 88, y + 28, x + 240, y + 148, COL_PANEL);
 
         graphics.fill(x + 94, y + 42, x + 234, y + 54, 0xFF0A0E12);
         int energy = this.menu.getData().get(0);
@@ -118,7 +116,7 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
         int heat = this.menu.getData().get(5);
         int maxHeat = Math.max(1, this.menu.getData().get(6));
         int heatW = (int) (138.0F * heat / (float) maxHeat);
-        int heatColor = heat > 800 ? COL_BAD : heat > 500 ? COL_BURN : COL_ACCENT;
+        int heatColor = heat > maxHeat * 4 / 5 ? COL_BAD : heat > maxHeat / 2 ? COL_BURN : COL_ACCENT;
         if (heatW > 0) {
             graphics.fill(x + 95, y + 65, x + 95 + heatW, y + 73, heatColor);
         }
@@ -145,8 +143,7 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
                         : running ? "gui.worlds_with_ores.flux.active" : "gui.worlds_with_ores.flux.ready"),
                 x + 200, y + 103, overheated || !formed ? COL_BAD : running ? COL_GOOD : COL_TEXT);
 
-        // Inventory panel.
-        graphics.fill(x + 30, y + 150, x + this.imageWidth - 30, y + this.imageHeight - 6, COL_PANEL);
+        graphics.fill(x + 30, y + 170, x + this.imageWidth - 30, y + this.imageHeight - 6, COL_PANEL);
         updateButtonLabels();
     }
 
@@ -187,21 +184,23 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
 
         graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.energy"), 94, 30, COL_MUTED, false);
         graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.heat"), 94, 56, COL_MUTED, false);
+        graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.port_transfer",
+                this.menu.getData().get(21)), 94, 116, COL_MUTED, false);
         graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.coil_hint"),
-                94, 116, COL_MUTED, false);
+                94, 136, COL_MUTED, false);
         if (this.menu.getData().get(18) > 0) {
             var mismatch = this.menu.getController().getFirstMismatch();
             if (mismatch != null) {
                 graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.missing",
                         mismatch.expected().expectedBlock().getName().getString(),
                         mismatch.pos().getX(), mismatch.pos().getY(), mismatch.pos().getZ()),
-                        8, 150, COL_BAD, false);
+                        8, 170, COL_BAD, false);
             }
         } else {
             graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.output",
-                    this.menu.getData().get(7)), 90, 150, COL_TEXT, false);
+                    this.menu.getData().get(7)), 90, 170, COL_TEXT, false);
             graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.efficiency",
-                    this.menu.getData().get(12)), 170, 150, COL_MUTED, false);
+                    this.menu.getData().get(12)), 170, 170, COL_MUTED, false);
         }
     }
 

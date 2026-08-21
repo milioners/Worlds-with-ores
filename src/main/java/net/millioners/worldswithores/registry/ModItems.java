@@ -88,22 +88,28 @@ public class ModItems {
 
     public static final RegistryObject<Item> ZINCWORLD = ITEMS.register("zincworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
-                    SoftFrames.only("create:zinc_block"), ModBlocks.ZINCWORLD_PORTAL));
+                    SoftFrames.only("create:zinc_block"), ModBlocks.ZINCWORLD_PORTAL,
+                    "tooltip.worlds_with_ores.mod.create"));
     public static final RegistryObject<Item> OSMIUMWORLD = ITEMS.register("osmiumworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
-                    SoftFrames.only("mekanism:block_osmium"), ModBlocks.OSMIUMWORLD_PORTAL));
+                    SoftFrames.only("mekanism:block_osmium"), ModBlocks.OSMIUMWORLD_PORTAL,
+                    "tooltip.worlds_with_ores.mod.mekanism"));
     public static final RegistryObject<Item> ALUMINUMWORLD = ITEMS.register("aluminumworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
-                    SoftFrames.only("immersiveengineering:storage_aluminum"), ModBlocks.ALUMINUMWORLD_PORTAL));
+                    SoftFrames.only("immersiveengineering:storage_aluminum"), ModBlocks.ALUMINUMWORLD_PORTAL,
+                    "tooltip.worlds_with_ores.mod.immersiveengineering"));
     public static final RegistryObject<Item> SILVERWORLD = ITEMS.register("silverworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
-                    SoftFrames.only("thermal:silver_block"), ModBlocks.SILVERWORLD_PORTAL));
+                    SoftFrames.only("thermal:silver_block"), ModBlocks.SILVERWORLD_PORTAL,
+                    "tooltip.worlds_with_ores.mod.thermal"));
     public static final RegistryObject<Item> YELLORIUMWORLD = ITEMS.register("yelloriumworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
-                    SoftFrames.only("bigreactors:yellorium_block"), ModBlocks.YELLORIUMWORLD_PORTAL));
+                    SoftFrames.only("bigreactors:yellorium_block"), ModBlocks.YELLORIUMWORLD_PORTAL,
+                    "tooltip.worlds_with_ores.mod.bigreactors"));
     public static final RegistryObject<Item> CERTUSWORLD = ITEMS.register("certusworld",
             () -> new PortalIgniterItem(new Item.Properties().stacksTo(64),
-                    SoftFrames.only("ae2:quartz_block"), ModBlocks.CERTUSWORLD_PORTAL));
+                    SoftFrames.only("ae2:quartz_block"), ModBlocks.CERTUSWORLD_PORTAL,
+                    "tooltip.worlds_with_ores.mod.ae2"));
 
     public static final RegistryObject<Item> FLUX_CASING = fluxBlockItem("flux_casing", ModBlocks.FLUX_CASING,
             "tooltip.worlds_with_ores.flux_casing");
@@ -138,6 +144,14 @@ public class ModItems {
             () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_cooling"));
     public static final RegistryObject<Item> FLUX_MODULE_CAPACITY = ITEMS.register("flux_module_capacity",
             () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_capacity"));
+    public static final RegistryObject<Item> FLUX_MODULE_HEAT_CAP = ITEMS.register("flux_module_heat_cap",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_heat_cap"));
+    public static final RegistryObject<Item> FLUX_MODULE_OVERCLOCK = ITEMS.register("flux_module_overclock",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_overclock"));
+    public static final RegistryObject<Item> FLUX_MODULE_TRANSFER = ITEMS.register("flux_module_transfer",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_transfer"));
+    public static final RegistryObject<Item> FLUX_MODULE_SAFEGUARD = ITEMS.register("flux_module_safeguard",
+            () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_safeguard"));
     public static final RegistryObject<Item> PORTAL_FLUX_PICKAXE = ITEMS.register("portal_flux_pickaxe",
             PortalFluxPickaxeItem::new);
 

@@ -1,7 +1,80 @@
 {
   "type": "worlds_with_ores:soft_terrain_fill",
   "config": {
-    "ore": "thermal:silver_ore",
+    "ores": [
+      {
+        "id": "thermal:silver_ore",
+        "weight": 28
+      },
+      {
+        "id": "thermal:deepslate_silver_ore",
+        "weight": 8
+      },
+      {
+        "id": "thermal:tin_ore",
+        "weight": 12
+      },
+      {
+        "id": "thermal:deepslate_tin_ore",
+        "weight": 4
+      },
+      {
+        "id": "thermal:lead_ore",
+        "weight": 10
+      },
+      {
+        "id": "thermal:deepslate_lead_ore",
+        "weight": 4
+      },
+      {
+        "id": "thermal:nickel_ore",
+        "weight": 10
+      },
+      {
+        "id": "thermal:deepslate_nickel_ore",
+        "weight": 4
+      },
+      {
+        "id": "thermal:copper_ore",
+        "weight": 6
+      },
+      {
+        "id": "thermal:deepslate_copper_ore",
+        "weight": 2
+      },
+      {
+        "id": "thermal:niter_ore",
+        "weight": 6
+      },
+      {
+        "id": "thermal:deepslate_niter_ore",
+        "weight": 2
+      },
+      {
+        "id": "thermal:cinnabar_ore",
+        "weight": 5
+      },
+      {
+        "id": "thermal:deepslate_cinnabar_ore",
+        "weight": 2
+      },
+      {
+        "id": "thermal:apatite_ore",
+        "weight": 5
+      },
+      {
+        "id": "thermal:deepslate_apatite_ore",
+        "weight": 2
+      },
+      {
+        "id": "thermal:ruby_ore",
+        "weight": 3
+      },
+      {
+        "id": "thermal:sapphire_ore",
+        "weight": 3
+      }
+    ],
     "replaceables": [
       "minecraft:stone",
       "minecraft:deepslate",

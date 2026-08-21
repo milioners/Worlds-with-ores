@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.SlotItemHandler;
 import net.millioners.worldswithores.blockentity.FluxControllerBlockEntity;
+import net.millioners.worldswithores.blockentity.FluxModuleType;
 import net.millioners.worldswithores.energy.PortalFuels;
 import net.millioners.worldswithores.registry.ModBlocks;
 import net.millioners.worldswithores.registry.ModMenus;
@@ -18,9 +19,10 @@ import net.millioners.worldswithores.registry.ModMenus;
 public class FluxControllerMenu extends AbstractContainerMenu {
     private final FluxControllerBlockEntity controller;
     private final ContainerData data;
+    public static final int MACHINE_SLOTS = 2 + FluxModuleType.SLOT_COUNT;
 
     public FluxControllerMenu(int id, Inventory playerInv, FriendlyByteBuf buf) {
-        this(id, playerInv, playerInv.player.level().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(21));
+        this(id, playerInv, playerInv.player.level().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(22));
     }
 
     public FluxControllerMenu(int id, Inventory playerInv, BlockEntity be, ContainerData data) {
@@ -41,17 +43,19 @@ public class FluxControllerMenu extends AbstractContainerMenu {
                 return stack.is(net.millioners.worldswithores.registry.ModItems.FLUX_COOLANT_CELL.get());
             }
         });
-        for (int slot = 0; slot < 4; slot++) {
-            this.addSlot(new SlotItemHandler(this.controller.getModules(), slot, 10 + slot * 20, 108));
+        for (int slot = 0; slot < FluxModuleType.SLOT_COUNT; slot++) {
+            int row = slot / 4;
+            int col = slot % 4;
+            this.addSlot(new SlotItemHandler(this.controller.getModules(), slot, 10 + col * 20, 108 + row * 20));
         }
 
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                this.addSlot(new Slot(playerInv, col + row * 9 + 9, 40 + col * 18, 166 + row * 18));
+                this.addSlot(new Slot(playerInv, col + row * 9 + 9, 40 + col * 18, 186 + row * 18));
             }
         }
         for (int col = 0; col < 9; col++) {
-            this.addSlot(new Slot(playerInv, col, 40 + col * 18, 226));
+            this.addSlot(new Slot(playerInv, col, 40 + col * 18, 246));
         }
     }
 
@@ -92,8 +96,10 @@ public class FluxControllerMenu extends AbstractContainerMenu {
         if (slot != null && slot.hasItem()) {
             ItemStack stack = slot.getItem();
             result = stack.copy();
-            if (index < 6) {
-                if (!this.moveItemStackTo(stack, 6, this.slots.size(), true)) {
+            int playerStart = MACHINE_SLOTS;
+            int playerHotbar = MACHINE_SLOTS + 27;
+            if (index < MACHINE_SLOTS) {
+                if (!this.moveItemStackTo(stack, playerStart, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else if (PortalFuels.isFuel(stack)) {
@@ -104,19 +110,16 @@ public class FluxControllerMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(stack, 1, 2, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (stack.is(net.millioners.worldswithores.registry.ModItems.FLUX_MODULE_OUTPUT.get())) {
-                if (!this.moveItemStackTo(stack, 2, 3, false)) return ItemStack.EMPTY;
-            } else if (stack.is(net.millioners.worldswithores.registry.ModItems.FLUX_MODULE_EFFICIENCY.get())) {
-                if (!this.moveItemStackTo(stack, 3, 4, false)) return ItemStack.EMPTY;
-            } else if (stack.is(net.millioners.worldswithores.registry.ModItems.FLUX_MODULE_COOLING.get())) {
-                if (!this.moveItemStackTo(stack, 4, 5, false)) return ItemStack.EMPTY;
-            } else if (stack.is(net.millioners.worldswithores.registry.ModItems.FLUX_MODULE_CAPACITY.get())) {
-                if (!this.moveItemStackTo(stack, 5, 6, false)) return ItemStack.EMPTY;
-            } else if (index < 33) {
-                if (!this.moveItemStackTo(stack, 33, this.slots.size(), false)) {
+            } else if (FluxModuleType.isModule(stack)) {
+                int moduleSlot = FluxModuleType.slotFor(stack);
+                if (moduleSlot < 0 || !this.moveItemStackTo(stack, 2 + moduleSlot, 3 + moduleSlot, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(stack, 6, 33, false)) {
+            } else if (index < playerHotbar) {
+                if (!this.moveItemStackTo(stack, playerHotbar, this.slots.size(), false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(stack, playerStart, playerHotbar, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack.isEmpty()) {

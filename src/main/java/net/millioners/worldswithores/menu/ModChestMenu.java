@@ -14,6 +14,7 @@ import net.millioners.worldswithores.registry.ModMenus;
 
 public class ModChestMenu extends AbstractContainerMenu {
     private final ModChestBlockEntity chest;
+    private final Inventory playerInv;
 
     public ModChestMenu(int id, Inventory playerInv, FriendlyByteBuf buf) {
         this(id, playerInv, playerInv.player.level().getBlockEntity(buf.readBlockPos()));
@@ -22,23 +23,40 @@ public class ModChestMenu extends AbstractContainerMenu {
     public ModChestMenu(int id, Inventory playerInv, BlockEntity be) {
         super(ModMenus.CHEST.get(), id);
         this.chest = (ModChestBlockEntity) be;
+        this.playerInv = playerInv;
 
-        // Original layout: 11 x 3 = 33 slots
         int index = 0;
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 11; col++) {
-                this.addSlot(new SlotItemHandler(this.chest.getItems(), index++, 26 + col * 18, 8 + row * 18));
+                this.addSlot(new SlotItemHandler(this.chest.getItems(), index++, 26 + col * 18, 24 + row * 18));
             }
         }
 
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                this.addSlot(new Slot(playerInv, col + row * 9 + 9, 45 + col * 18, 84 + row * 18));
+                this.addSlot(new Slot(playerInv, col + row * 9 + 9, 45 + col * 18, 100 + row * 18));
             }
         }
         for (int col = 0; col < 9; col++) {
-            this.addSlot(new Slot(playerInv, col, 45 + col * 18, 142));
+            this.addSlot(new Slot(playerInv, col, 45 + col * 18, 158));
         }
+    }
+
+    public ModChestBlockEntity getChest() {
+        return this.chest;
+    }
+
+    @Override
+    public boolean clickMenuButton(Player player, int id) {
+        if (id == 0) {
+            this.chest.sortContents();
+            return true;
+        }
+        if (id == 1) {
+            this.chest.depositMatching(this.playerInv);
+            return true;
+        }
+        return false;
     }
 
     @Override

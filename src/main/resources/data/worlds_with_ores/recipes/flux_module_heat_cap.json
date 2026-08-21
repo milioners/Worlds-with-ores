@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CKC",
+    "ICI"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "K": {
+      "item": "worlds_with_ores:flux_coolant_cell"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_module_heat_cap"
+  }
+}

@@ -1,7 +1,16 @@
 {
   "type": "worlds_with_ores:soft_terrain_fill",
   "config": {
-    "ore": "create:zinc_ore",
+    "ores": [
+      {
+        "id": "create:zinc_ore",
+        "weight": 70
+      },
+      {
+        "id": "create:deepslate_zinc_ore",
+        "weight": 30
+      }
+    ],
     "replaceables": [
       "minecraft:stone",
       "minecraft:deepslate",

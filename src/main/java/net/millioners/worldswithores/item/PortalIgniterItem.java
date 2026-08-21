@@ -1,17 +1,21 @@
 package net.millioners.worldswithores.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.millioners.worldswithores.block.ModPortalBlock;
 import net.millioners.worldswithores.util.SoftFrames;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -19,15 +23,23 @@ import java.util.function.Supplier;
 public class PortalIgniterItem extends Item {
     private final List<Supplier<Block>> frameBlocks;
     private final Supplier<ModPortalBlock> portalBlock;
+    @Nullable
+    private final String requiresModLangKey;
 
     public PortalIgniterItem(Properties properties, Supplier<Block> frameBlock, Supplier<ModPortalBlock> portalBlock) {
-        this(properties, List.of(frameBlock), portalBlock);
+        this(properties, List.of(frameBlock), portalBlock, null);
     }
 
     public PortalIgniterItem(Properties properties, List<Supplier<Block>> frameBlocks, Supplier<ModPortalBlock> portalBlock) {
+        this(properties, frameBlocks, portalBlock, null);
+    }
+
+    public PortalIgniterItem(Properties properties, List<Supplier<Block>> frameBlocks,
+                             Supplier<ModPortalBlock> portalBlock, @Nullable String requiresModLangKey) {
         super(properties);
         this.frameBlocks = frameBlocks;
         this.portalBlock = portalBlock;
+        this.requiresModLangKey = requiresModLangKey;
     }
 
     @Override
@@ -55,5 +67,13 @@ public class PortalIgniterItem extends Item {
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
         return InteractionResult.FAIL;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        if (this.requiresModLangKey != null) {
+            tooltip.add(Component.translatable("tooltip.worlds_with_ores.requires_mod",
+                    Component.translatable(this.requiresModLangKey)).withStyle(ChatFormatting.GOLD));
+        }
     }
 }

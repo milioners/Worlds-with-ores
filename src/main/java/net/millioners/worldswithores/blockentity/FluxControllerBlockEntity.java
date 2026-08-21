@@ -64,7 +64,7 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
             return stack.is(ModItems.FLUX_COOLANT_CELL.get());
         }
     };
-    private final ItemStackHandler modules = new ItemStackHandler(4) {
+    private final ItemStackHandler modules = new ItemStackHandler(FluxModuleType.SLOT_COUNT) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -72,13 +72,8 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return switch (slot) {
-                case 0 -> stack.is(ModItems.FLUX_MODULE_OUTPUT.get());
-                case 1 -> stack.is(ModItems.FLUX_MODULE_EFFICIENCY.get());
-                case 2 -> stack.is(ModItems.FLUX_MODULE_COOLING.get());
-                case 3 -> stack.is(ModItems.FLUX_MODULE_CAPACITY.get());
-                default -> false;
-            };
+            FluxModuleType type = FluxModuleType.bySlot(slot);
+            return type != null && type.matches(stack);
         }
     };
 
@@ -97,6 +92,7 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
     private int mismatchCount;
     private int energyTrend;
     private int heatTrend;
+    private int lastTransfer;
     private int clientEnergy;
     private int clientBurnLeft;
     private int clientBurnTotal;
@@ -112,7 +108,7 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
                 case 3 -> FluxControllerBlockEntity.this.burnTotal;
                 case 4 -> FluxControllerBlockEntity.this.formed ? 1 : 0;
                 case 5 -> FluxControllerBlockEntity.this.heat;
-                case 6 -> MAX_HEAT;
+                case 6 -> FluxControllerBlockEntity.this.effectiveMaxHeat();
                 case 7 -> FluxControllerBlockEntity.this.generation;
                 case 8 -> FluxControllerBlockEntity.this.tier.ordinal();
                 case 9 -> FluxControllerBlockEntity.this.overheated ? 1 : 0;
@@ -120,13 +116,14 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
                 case 11 -> FluxControllerBlockEntity.this.powerScale;
                 case 12 -> FluxControllerBlockEntity.this.efficiencyPercent();
                 case 13 -> FluxControllerBlockEntity.this.linkedPort != null ? 1 : 0;
-                case 14 -> FluxControllerBlockEntity.this.hasModule(3) ? 1 : 0;
-                case 15 -> FluxControllerBlockEntity.this.hasModule(0) ? 1 : 0;
-                case 16 -> FluxControllerBlockEntity.this.hasModule(2) ? 1 : 0;
+                case 14 -> FluxControllerBlockEntity.this.hasModule(FluxModuleType.CAPACITY) ? 1 : 0;
+                case 15 -> FluxControllerBlockEntity.this.hasModule(FluxModuleType.OUTPUT) ? 1 : 0;
+                case 16 -> FluxControllerBlockEntity.this.hasModule(FluxModuleType.COOLING) ? 1 : 0;
                 case 17 -> FluxControllerBlockEntity.this.autoStop ? 1 : 0;
                 case 18 -> FluxControllerBlockEntity.this.mismatchCount;
                 case 19 -> FluxControllerBlockEntity.this.energyTrend;
                 case 20 -> FluxControllerBlockEntity.this.heatTrend;
+                case 21 -> FluxControllerBlockEntity.this.lastTransfer;
                 default -> 0;
             };
         }
@@ -161,7 +158,7 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
 
         @Override
         public int getCount() {
-            return 21;
+            return 22;
         }
     };
 
@@ -190,16 +187,47 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
         return !this.modules.getStackInSlot(slot).isEmpty();
     }
 
+    public boolean hasModule(FluxModuleType type) {
+        return hasModule(type.slot());
+    }
+
     public int efficiencyPercent() {
-        return hasModule(1) ? 125 : 100;
+        int base = hasModule(FluxModuleType.EFFICIENCY) ? 125 : 100;
+        if (hasModule(FluxModuleType.OVERCLOCK)) {
+            base = Math.max(50, base - 25);
+        }
+        return base;
     }
 
     public int coolingBonus() {
-        return hasModule(2) ? 5 : 0;
+        int bonus = hasModule(FluxModuleType.COOLING) ? 5 : 0;
+        if (hasModule(FluxModuleType.SAFEGUARD)) {
+            bonus += 3;
+        }
+        return bonus;
     }
 
     public int effectiveCapacity() {
-        return CAPACITY + (hasModule(3) ? 1_000_000 : 0);
+        return CAPACITY + (hasModule(FluxModuleType.CAPACITY) ? 1_000_000 : 0);
+    }
+
+    public int effectiveMaxHeat() {
+        return MAX_HEAT + (hasModule(FluxModuleType.HEAT_CAP) ? 200 : 0);
+    }
+
+    public int transferRate() {
+        int rate = MAX_TRANSFER;
+        if (hasModule(FluxModuleType.TRANSFER)) {
+            rate *= 2;
+        }
+        if (hasModule(FluxModuleType.OUTPUT)) {
+            rate = rate * 125 / 100;
+        }
+        return rate;
+    }
+
+    public int getLastTransfer() {
+        return this.lastTransfer;
     }
 
     public void setPowerScale(int powerScale) {
@@ -272,7 +300,10 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
         be.formed = validation.isComplete();
         be.mismatchCount = validation.mismatches().size();
         be.tier = be.formed ? FluxMultiblock.getTier(level, pos) : FluxCoilTier.BASIC;
-        int outputPercent = be.hasModule(0) ? 125 : 100;
+        int outputPercent = be.hasModule(FluxModuleType.OUTPUT) ? 125 : 100;
+        if (be.hasModule(FluxModuleType.OVERCLOCK)) {
+            outputPercent += 50;
+        }
         be.generation = be.tier.generation() * be.powerScale * outputPercent / 10_000;
         be.energy.setCapacity(be.effectiveCapacity());
         boolean active = false;
@@ -297,7 +328,8 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
                 }
             }
 
-            if (be.coolantLeft <= 0 && be.heat >= 350) {
+            int coolantThreshold = be.hasModule(FluxModuleType.SAFEGUARD) ? 250 : 350;
+            if (be.coolantLeft <= 0 && be.heat >= coolantThreshold) {
                 ItemStack coolantStack = be.coolant.getStackInSlot(0);
                 if (coolantStack.is(ModItems.FLUX_COOLANT_CELL.get())) {
                     be.coolant.extractItem(0, 1, false);
@@ -307,6 +339,9 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
             }
 
             int cooling = (be.coolantLeft > 0 ? 10 : 2) + be.coolingBonus();
+            if (be.hasModule(FluxModuleType.SAFEGUARD) && be.heat > be.effectiveMaxHeat() - 150) {
+                cooling += 4;
+            }
             if (be.coolantLeft > 0 && be.heat > 0) {
                 be.coolantLeft--;
             }
@@ -319,11 +354,12 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
                 be.burnLeft = Math.max(0, be.burnLeft - fuelCost);
                 be.energy.addEnergy(generated);
                 int addedHeat = Math.max(1, be.tier.heatPerTick() * be.fuelHeatPercent / 100
-                        + (be.hasModule(0) ? 2 : 0));
-                be.heat = Math.min(MAX_HEAT, be.heat + addedHeat);
+                        + (be.hasModule(FluxModuleType.OUTPUT) ? 2 : 0)
+                        + (be.hasModule(FluxModuleType.OVERCLOCK) ? 4 : 0));
+                be.heat = Math.min(be.effectiveMaxHeat(), be.heat + addedHeat);
                 active = true;
             }
-            if (be.heat >= MAX_HEAT) {
+            if (be.heat >= be.effectiveMaxHeat()) {
                 be.overheated = true;
                 active = false;
             }
@@ -333,6 +369,7 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
         } else {
             be.generation = 0;
             be.linkedPort = null;
+            be.lastTransfer = 0;
             be.heat = Math.max(0, be.heat - 4);
         }
         be.energyTrend = be.energy.getEnergyStored() - previousEnergy;
@@ -362,6 +399,7 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
     }
 
     private static void pushEnergyThroughPort(Level level, BlockPos pos, FluxControllerBlockEntity be) {
+        be.lastTransfer = 0;
         if (be.energy.getEnergyStored() <= 0) {
             return;
         }
@@ -373,11 +411,17 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
         }
         Direction outputDirection = portState.getValue(net.millioners.worldswithores.block.FluxEnergyPortBlock.FACING);
         BlockEntity neighbor = level.getBlockEntity(portPos.relative(outputDirection));
-        if (neighbor == null) return;
+        if (neighbor == null) {
+            return;
+        }
+        int rate = be.transferRate();
         neighbor.getCapability(ForgeCapabilities.ENERGY, outputDirection.getOpposite()).ifPresent(storage -> {
             if (storage.canReceive()) {
-                int sent = storage.receiveEnergy(Math.min(MAX_TRANSFER, be.energy.getEnergyStored()), false);
-                if (sent > 0) be.energy.extractEnergy(sent, false);
+                int sent = storage.receiveEnergy(Math.min(rate, be.energy.getEnergyStored()), false);
+                if (sent > 0) {
+                    be.energy.extractEnergy(sent, false);
+                    be.lastTransfer = sent;
+                }
             }
         });
     }
@@ -432,7 +476,11 @@ public class FluxControllerBlockEntity extends BlockEntity implements MenuProvid
             this.coolant.deserializeNBT(tag.getCompound("Coolant"));
         }
         if (tag.contains("Modules")) {
-            this.modules.deserializeNBT(tag.getCompound("Modules"));
+            CompoundTag modulesTag = tag.getCompound("Modules");
+            if (modulesTag.getInt("Size") < FluxModuleType.SLOT_COUNT) {
+                modulesTag.putInt("Size", FluxModuleType.SLOT_COUNT);
+            }
+            this.modules.deserializeNBT(modulesTag);
         }
         this.burnLeft = tag.getInt("BurnLeft");
         this.burnTotal = tag.getInt("BurnTotal");

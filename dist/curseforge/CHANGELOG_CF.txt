@@ -1,13 +1,7 @@
-﻿### Worlds with ores 1.2.2 (Forge 1.20.1)
+﻿1.3.0-1.20.1
 
-**Portal Flux Energy is Work in Progress** — systems work, but balance/UI may change.
-
-#### Fixes
-- Reactor GUI layout (module slots / labels / buttons no longer overlap)
-- Lava Obsidian sword displays correctly again
-- Clearer coil upgrades: tooltips + actionbar hints (Basic→Advanced→Quantum on all 4 coils)
-- Portal world generation less “blob soup”
-
-#### Notes
-- Existing chunks keep old terrain; create a new world or explore new chunks for gen fixes
-- Mark this file as **Beta** on CurseForge while energy stays WIP
+- Industrial dimensions: weighted multi-ore soft fill (all ores per mod, primary-dominant)
+- Requires-mod tooltips on industrial portal igniters
+- Portal Flux: 8 module slots (Heat Cap / Overclock / Transfer / Safeguard) + port transfer FE/t display
+- Portal Chest: Flux-styled GUI, Sort + Deposit matching, comparator signal
+- Book / lang EN+RU updates for multi-ore terrain and Extreme Reactors wording

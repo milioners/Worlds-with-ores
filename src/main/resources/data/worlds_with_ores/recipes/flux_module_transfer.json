@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CRC",
+    "RKR",
+    "CRC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "K": {
+      "item": "worlds_with_ores:flux_energy_port"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_module_transfer"
+  }
+}

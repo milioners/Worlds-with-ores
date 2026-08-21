@@ -289,7 +289,11 @@ public final class ModRecipePages {
                 ModItems.FLUX_MODULE_OUTPUT.get(),
                 ModItems.FLUX_MODULE_EFFICIENCY.get(),
                 ModItems.FLUX_MODULE_COOLING.get(),
-                ModItems.FLUX_MODULE_CAPACITY.get()
+                ModItems.FLUX_MODULE_CAPACITY.get(),
+                ModItems.FLUX_MODULE_HEAT_CAP.get(),
+                ModItems.FLUX_MODULE_OVERCLOCK.get(),
+                ModItems.FLUX_MODULE_TRANSFER.get(),
+                ModItems.FLUX_MODULE_SAFEGUARD.get()
         ), "gui.worlds_with_ores.book.energy.modules.hint"));
         list.add(Page.info("gui.worlds_with_ores.book.energy.hologram.title", icons(
                 ModItems.FLUX_CONTROLLER.get(), ModItems.RECIPES_BOOK.get()

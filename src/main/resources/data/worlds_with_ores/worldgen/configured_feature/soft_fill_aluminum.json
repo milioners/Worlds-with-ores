@@ -1,7 +1,48 @@
 {
   "type": "worlds_with_ores:soft_terrain_fill",
   "config": {
-    "ore": "immersiveengineering:ore_aluminum",
+    "ores": [
+      {
+        "id": "immersiveengineering:ore_aluminum",
+        "weight": 40
+      },
+      {
+        "id": "immersiveengineering:deepslate_ore_aluminum",
+        "weight": 12
+      },
+      {
+        "id": "immersiveengineering:ore_lead",
+        "weight": 12
+      },
+      {
+        "id": "immersiveengineering:deepslate_ore_lead",
+        "weight": 5
+      },
+      {
+        "id": "immersiveengineering:ore_silver",
+        "weight": 10
+      },
+      {
+        "id": "immersiveengineering:deepslate_ore_silver",
+        "weight": 4
+      },
+      {
+        "id": "immersiveengineering:ore_nickel",
+        "weight": 10
+      },
+      {
+        "id": "immersiveengineering:deepslate_ore_nickel",
+        "weight": 4
+      },
+      {
+        "id": "immersiveengineering:ore_uranium",
+        "weight": 8
+      },
+      {
+        "id": "immersiveengineering:deepslate_ore_uranium",
+        "weight": 3
+      }
+    ],
     "replaceables": [
       "minecraft:stone",
       "minecraft:deepslate",

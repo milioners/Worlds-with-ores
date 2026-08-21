@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GRG",
+    "RKR",
+    "GRG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "worlds_with_ores:ingot_redstone"
+    },
+    "K": {
+      "item": "worlds_with_ores:flux_coil_upgrade_advanced"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_module_overclock"
+  }
+}

@@ -81,6 +81,10 @@ public class ModCreativeTabs {
                         output.accept(ModItems.FLUX_MODULE_EFFICIENCY.get());
                         output.accept(ModItems.FLUX_MODULE_COOLING.get());
                         output.accept(ModItems.FLUX_MODULE_CAPACITY.get());
+                        output.accept(ModItems.FLUX_MODULE_HEAT_CAP.get());
+                        output.accept(ModItems.FLUX_MODULE_OVERCLOCK.get());
+                        output.accept(ModItems.FLUX_MODULE_TRANSFER.get());
+                        output.accept(ModItems.FLUX_MODULE_SAFEGUARD.get());
                         output.accept(ModItems.PORTAL_FLUX_PICKAXE.get());
 
                         output.accept(ModItems.NETHERBRICKBRINSTAR.get());

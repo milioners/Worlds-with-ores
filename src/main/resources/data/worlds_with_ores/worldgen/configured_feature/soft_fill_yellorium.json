@@ -1,7 +1,24 @@
 {
   "type": "worlds_with_ores:soft_terrain_fill",
   "config": {
-    "ore": "bigreactors:yellorite_ore",
+    "ores": [
+      {
+        "id": "bigreactors:yellorite_ore",
+        "weight": 70
+      },
+      {
+        "id": "bigreactors:deepslate_yellorite_ore",
+        "weight": 15
+      },
+      {
+        "id": "bigreactors:anglesite_ore",
+        "weight": 8
+      },
+      {
+        "id": "bigreactors:benitoite_ore",
+        "weight": 7
+      }
+    ],
     "replaceables": [
       "minecraft:stone",
       "minecraft:deepslate",
