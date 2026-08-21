@@ -174,7 +174,6 @@ public class FluxControllerScreen extends AbstractContainerScreen<FluxController
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.drawString(this.font, this.title, 8, 7, COL_TEXT, false);
-        graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.wip"), 118, 7, 0xFFE0B060, false);
         graphics.drawString(this.font, Component.translatable("gui.worlds_with_ores.flux.tier",
                 this.menu.getData().get(8) + 1), 210, 7, COL_ACCENT, false);
 

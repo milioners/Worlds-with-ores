@@ -278,7 +278,9 @@ public final class ModRecipePages {
         list.add(Page.info("gui.worlds_with_ores.book.energy.tiers.title", icons(
                 ModItems.FLUX_COIL.get(),
                 ModItems.FLUX_COIL_UPGRADE_ADVANCED.get(),
-                ModItems.FLUX_COIL_UPGRADE_QUANTUM.get()
+                ModItems.FLUX_COIL_UPGRADE_QUANTUM.get(),
+                ModItems.FLUX_COIL_UPGRADE_SINGULARITY.get(),
+                ModItems.FLUX_COIL_UPGRADE_NEXUS.get()
         ), "gui.worlds_with_ores.book.energy.tiers.hint"));
         list.add(Page.info("gui.worlds_with_ores.book.energy.cooling.title", icons(
                 ModItems.FLUX_COOLANT_CELL.get(),
@@ -328,6 +330,42 @@ public final class ModRecipePages {
                 Items.DIAMOND, ModItems.FLUX_COIL_UPGRADE_ADVANCED.get(), Items.DIAMOND,
                 Items.AMETHYST_SHARD, Items.DIAMOND, Items.AMETHYST_SHARD
         ), i(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.upgrade_singularity", shaped(
+                Items.NETHERITE_INGOT, ModItems.FLUX_CORE.get(), Items.NETHERITE_INGOT,
+                ModItems.FLUX_CORE.get(), ModItems.FLUX_COIL_UPGRADE_QUANTUM.get(), ModItems.FLUX_CORE.get(),
+                Items.NETHERITE_INGOT, ModItems.FLUX_CORE.get(), Items.NETHERITE_INGOT
+        ), i(ModItems.FLUX_COIL_UPGRADE_SINGULARITY.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.upgrade_nexus", shaped(
+                Items.NETHER_STAR, Items.ECHO_SHARD, Items.NETHER_STAR,
+                Items.ECHO_SHARD, ModItems.FLUX_COIL_UPGRADE_SINGULARITY.get(), Items.ECHO_SHARD,
+                Items.NETHER_STAR, Items.ECHO_SHARD, Items.NETHER_STAR
+        ), i(ModItems.FLUX_COIL_UPGRADE_NEXUS.get())));
+        list.add(Page.info("gui.worlds_with_ores.book.energy.network.title", icons(
+                ModItems.FLUX_CABLE.get(),
+                ModItems.FLUX_WIRELESS_TRANSMITTER.get(),
+                ModItems.FLUX_WIRELESS_RECEIVER.get(),
+                ModItems.FLUX_LINKER.get()
+        ), "gui.worlds_with_ores.book.energy.network.hint"));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.cable", shaped(
+                null, ModItems.INGOT_REDSTONE.get(), null,
+                ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CASING.get(), ModItems.INGOT_REDSTONE.get(),
+                null, ModItems.INGOT_REDSTONE.get(), null
+        ), i(ModItems.FLUX_CABLE.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.wireless_tx", shaped(
+                ModItems.FLUX_CASING.get(), Items.ENDER_PEARL, ModItems.FLUX_CASING.get(),
+                ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CORE.get(), ModItems.INGOT_REDSTONE.get(),
+                ModItems.FLUX_CASING.get(), ModItems.FLUX_CABLE.get(), ModItems.FLUX_CASING.get()
+        ), i(ModItems.FLUX_WIRELESS_TRANSMITTER.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.wireless_rx", shaped(
+                ModItems.FLUX_CASING.get(), Items.ENDER_EYE, ModItems.FLUX_CASING.get(),
+                ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CORE.get(), ModItems.INGOT_REDSTONE.get(),
+                ModItems.FLUX_CASING.get(), ModItems.FLUX_CABLE.get(), ModItems.FLUX_CASING.get()
+        ), i(ModItems.FLUX_WIRELESS_RECEIVER.get())));
+        list.add(Page.crafting("gui.worlds_with_ores.book.energy.linker", shaped(
+                null, Items.REDSTONE, null,
+                Items.COPPER_INGOT, ModItems.FLUX_CORE.get(), Items.COPPER_INGOT,
+                null, Items.REDSTONE, null
+        ), i(ModItems.FLUX_LINKER.get())));
         list.add(Page.crafting("gui.worlds_with_ores.book.energy.battery", shaped(
                 ModItems.FLUX_CASING.get(), ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CASING.get(),
                 ModItems.INGOT_REDSTONE.get(), ModItems.FLUX_CORE.get(), ModItems.INGOT_REDSTONE.get(),
@@ -338,6 +376,12 @@ public final class ModRecipePages {
                 ModItems.FLUX_CASING.get(), Items.DIAMOND, ModItems.FLUX_CASING.get(),
                 ModItems.FLUX_CASING.get(), ModItems.FLUX_COIL.get(), ModItems.FLUX_CASING.get()
         ), i(ModItems.FLUX_CHARGER.get())));
+        list.add(Page.info("gui.worlds_with_ores.book.energy.gear.title", icons(
+                ModItems.PORTAL_FLUX_PICKAXE.get(),
+                ModItems.PORTAL_FLUX_SWORD.get(),
+                ModItems.PORTAL_FLUX_CHESTPLATE.get(),
+                ModItems.PORTAL_FLUX_HELMET.get()
+        ), "gui.worlds_with_ores.book.energy.gear.hint"));
         list.add(Page.crafting("gui.worlds_with_ores.book.energy.pickaxe", shaped(
                 ModItems.FLUX_CORE.get(), ModItems.FLUX_CORE.get(), ModItems.FLUX_CORE.get(),
                 null, Items.STICK, null,

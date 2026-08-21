@@ -8,6 +8,12 @@
     },
     "tier=quantum": {
       "model": "worlds_with_ores:block/flux_coil_quantum"
+    },
+    "tier=singularity": {
+      "model": "worlds_with_ores:block/flux_coil_singularity"
+    },
+    "tier=nexus": {
+      "model": "worlds_with_ores:block/flux_coil_nexus"
     }
   }
 }

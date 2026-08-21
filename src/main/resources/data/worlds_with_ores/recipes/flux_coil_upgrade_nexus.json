@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SES",
+    "EUE",
+    "SES"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:nether_star"
+    },
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "U": {
+      "item": "worlds_with_ores:flux_coil_upgrade_singularity"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_coil_upgrade_nexus"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CEC",
+    "RKR",
+    "CXC"
+  ],
+  "key": {
+    "C": {
+      "item": "worlds_with_ores:flux_casing"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "R": {
+      "item": "worlds_with_ores:ingot_redstone"
+    },
+    "K": {
+      "item": "worlds_with_ores:flux_core"
+    },
+    "X": {
+      "item": "worlds_with_ores:flux_cable"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_wireless_transmitter"
+  }
+}

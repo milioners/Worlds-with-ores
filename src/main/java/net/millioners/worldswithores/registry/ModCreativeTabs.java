@@ -73,10 +73,16 @@ public class ModCreativeTabs {
                         output.accept(ModItems.FLUX_CONTROLLER.get());
                         output.accept(ModItems.FLUX_BATTERY.get());
                         output.accept(ModItems.FLUX_CHARGER.get());
+                        output.accept(ModItems.FLUX_CABLE.get());
+                        output.accept(ModItems.FLUX_WIRELESS_TRANSMITTER.get());
+                        output.accept(ModItems.FLUX_WIRELESS_RECEIVER.get());
+                        output.accept(ModItems.FLUX_LINKER.get());
                         output.accept(ModItems.FLUX_CORE.get());
                         output.accept(ModItems.FLUX_COOLANT_CELL.get());
                         output.accept(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get());
                         output.accept(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get());
+                        output.accept(ModItems.FLUX_COIL_UPGRADE_SINGULARITY.get());
+                        output.accept(ModItems.FLUX_COIL_UPGRADE_NEXUS.get());
                         output.accept(ModItems.FLUX_MODULE_OUTPUT.get());
                         output.accept(ModItems.FLUX_MODULE_EFFICIENCY.get());
                         output.accept(ModItems.FLUX_MODULE_COOLING.get());
@@ -86,6 +92,14 @@ public class ModCreativeTabs {
                         output.accept(ModItems.FLUX_MODULE_TRANSFER.get());
                         output.accept(ModItems.FLUX_MODULE_SAFEGUARD.get());
                         output.accept(ModItems.PORTAL_FLUX_PICKAXE.get());
+                        output.accept(ModItems.PORTAL_FLUX_AXE.get());
+                        output.accept(ModItems.PORTAL_FLUX_SHOVEL.get());
+                        output.accept(ModItems.PORTAL_FLUX_HOE.get());
+                        output.accept(ModItems.PORTAL_FLUX_SWORD.get());
+                        output.accept(ModItems.PORTAL_FLUX_HELMET.get());
+                        output.accept(ModItems.PORTAL_FLUX_CHESTPLATE.get());
+                        output.accept(ModItems.PORTAL_FLUX_LEGGINGS.get());
+                        output.accept(ModItems.PORTAL_FLUX_BOOTS.get());
 
                         output.accept(ModItems.NETHERBRICKBRINSTAR.get());
                         output.accept(ModItems.NETHERBRICKCLASSICSPATTER.get());

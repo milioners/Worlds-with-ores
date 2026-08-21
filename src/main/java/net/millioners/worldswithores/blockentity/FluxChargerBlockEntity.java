@@ -18,9 +18,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.ItemStackHandler;
-import net.millioners.worldswithores.energy.ItemEnergy;
 import net.millioners.worldswithores.energy.ModEnergyStorage;
-import net.millioners.worldswithores.item.PortalFluxPickaxeItem;
 import net.millioners.worldswithores.menu.FluxChargerMenu;
 import net.millioners.worldswithores.registry.ModBlockEntities;
 import org.jetbrains.annotations.NotNull;
@@ -41,8 +39,7 @@ public class FluxChargerBlockEntity extends BlockEntity implements MenuProvider 
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return stack.getCapability(ForgeCapabilities.ENERGY).map(IEnergyStorage::canReceive).orElse(false)
-                    || stack.getItem() instanceof PortalFluxPickaxeItem;
+            return stack.getCapability(ForgeCapabilities.ENERGY).map(IEnergyStorage::canReceive).orElse(false);
         }
     };
 
@@ -97,10 +94,6 @@ public class FluxChargerBlockEntity extends BlockEntity implements MenuProvider 
                 moved[0] = storage.receiveEnergy(toSend, false);
             }
         });
-
-        if (moved[0] == 0 && stack.getItem() instanceof PortalFluxPickaxeItem) {
-            moved[0] = ItemEnergy.receive(stack, PortalFluxPickaxeItem.CAPACITY, CHARGE_RATE, toSend, false);
-        }
 
         if (moved[0] > 0) {
             be.energy.extractEnergy(moved[0], false);

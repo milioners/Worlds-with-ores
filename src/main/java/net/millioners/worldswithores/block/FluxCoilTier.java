@@ -5,7 +5,9 @@ import net.minecraft.util.StringRepresentable;
 public enum FluxCoilTier implements StringRepresentable {
     BASIC("basic", 160, 3),
     ADVANCED("advanced", 320, 5),
-    QUANTUM("quantum", 640, 8);
+    QUANTUM("quantum", 640, 8),
+    SINGULARITY("singularity", 1280, 12),
+    NEXUS("nexus", 2560, 16);
 
     private final String name;
     private final int generation;
@@ -29,7 +31,9 @@ public enum FluxCoilTier implements StringRepresentable {
         return switch (this) {
             case BASIC -> ADVANCED;
             case ADVANCED -> QUANTUM;
-            case QUANTUM -> QUANTUM;
+            case QUANTUM -> SINGULARITY;
+            case SINGULARITY -> NEXUS;
+            case NEXUS -> NEXUS;
         };
     }
 

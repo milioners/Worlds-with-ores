@@ -12,11 +12,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.millioners.worldswithores.WorldsWithOresMod;
 import net.millioners.worldswithores.item.FluxCoilBlockItem;
 import net.millioners.worldswithores.item.FluxCoilUpgradeItem;
+import net.millioners.worldswithores.item.FluxLinkerItem;
 import net.millioners.worldswithores.item.FluxTooltipBlockItem;
 import net.millioners.worldswithores.item.FluxTooltipItem;
 import net.millioners.worldswithores.item.ModArmorMaterials;
 import net.millioners.worldswithores.item.ModTiers;
-import net.millioners.worldswithores.item.PortalFluxPickaxeItem;
+import net.millioners.worldswithores.item.PortalFluxArmorItem;
+import net.millioners.worldswithores.item.PortalFluxTools;
 import net.millioners.worldswithores.item.PortalIgniterItem;
 import net.millioners.worldswithores.item.RecipesBookItem;
 import net.millioners.worldswithores.block.FluxCoilTier;
@@ -125,6 +127,14 @@ public class ModItems {
             "tooltip.worlds_with_ores.flux_battery");
     public static final RegistryObject<Item> FLUX_CHARGER = fluxBlockItem("flux_charger", ModBlocks.FLUX_CHARGER,
             "tooltip.worlds_with_ores.flux_charger");
+    public static final RegistryObject<Item> FLUX_CABLE = fluxBlockItem("flux_cable", ModBlocks.FLUX_CABLE,
+            "tooltip.worlds_with_ores.flux_cable");
+    public static final RegistryObject<Item> FLUX_WIRELESS_TRANSMITTER = fluxBlockItem("flux_wireless_transmitter",
+            ModBlocks.FLUX_WIRELESS_TRANSMITTER, "tooltip.worlds_with_ores.flux_wireless_transmitter");
+    public static final RegistryObject<Item> FLUX_WIRELESS_RECEIVER = fluxBlockItem("flux_wireless_receiver",
+            ModBlocks.FLUX_WIRELESS_RECEIVER, "tooltip.worlds_with_ores.flux_wireless_receiver");
+    public static final RegistryObject<Item> FLUX_LINKER = ITEMS.register("flux_linker",
+            () -> new FluxLinkerItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> FLUX_CORE = ITEMS.register("flux_core",
             () -> new FluxTooltipItem(new Item.Properties().stacksTo(16), "tooltip.worlds_with_ores.flux_core"));
@@ -136,6 +146,12 @@ public class ModItems {
     public static final RegistryObject<Item> FLUX_COIL_UPGRADE_QUANTUM = ITEMS.register("flux_coil_upgrade_quantum",
             () -> new FluxCoilUpgradeItem(new Item.Properties().stacksTo(16),
                     "tooltip.worlds_with_ores.flux_coil_upgrade_quantum", FluxCoilTier.ADVANCED));
+    public static final RegistryObject<Item> FLUX_COIL_UPGRADE_SINGULARITY = ITEMS.register("flux_coil_upgrade_singularity",
+            () -> new FluxCoilUpgradeItem(new Item.Properties().stacksTo(16),
+                    "tooltip.worlds_with_ores.flux_coil_upgrade_singularity", FluxCoilTier.QUANTUM));
+    public static final RegistryObject<Item> FLUX_COIL_UPGRADE_NEXUS = ITEMS.register("flux_coil_upgrade_nexus",
+            () -> new FluxCoilUpgradeItem(new Item.Properties().stacksTo(16),
+                    "tooltip.worlds_with_ores.flux_coil_upgrade_nexus", FluxCoilTier.SINGULARITY));
     public static final RegistryObject<Item> FLUX_MODULE_OUTPUT = ITEMS.register("flux_module_output",
             () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_output"));
     public static final RegistryObject<Item> FLUX_MODULE_EFFICIENCY = ITEMS.register("flux_module_efficiency",
@@ -153,7 +169,23 @@ public class ModItems {
     public static final RegistryObject<Item> FLUX_MODULE_SAFEGUARD = ITEMS.register("flux_module_safeguard",
             () -> new FluxTooltipItem(new Item.Properties().stacksTo(1), "tooltip.worlds_with_ores.flux_module_safeguard"));
     public static final RegistryObject<Item> PORTAL_FLUX_PICKAXE = ITEMS.register("portal_flux_pickaxe",
-            PortalFluxPickaxeItem::new);
+            PortalFluxTools.Pickaxe::new);
+    public static final RegistryObject<Item> PORTAL_FLUX_AXE = ITEMS.register("portal_flux_axe",
+            PortalFluxTools.Axe::new);
+    public static final RegistryObject<Item> PORTAL_FLUX_SHOVEL = ITEMS.register("portal_flux_shovel",
+            PortalFluxTools.Shovel::new);
+    public static final RegistryObject<Item> PORTAL_FLUX_HOE = ITEMS.register("portal_flux_hoe",
+            PortalFluxTools.Hoe::new);
+    public static final RegistryObject<Item> PORTAL_FLUX_SWORD = ITEMS.register("portal_flux_sword",
+            PortalFluxTools.Sword::new);
+    public static final RegistryObject<Item> PORTAL_FLUX_HELMET = ITEMS.register("portal_flux_helmet",
+            () -> new PortalFluxArmorItem(ArmorItem.Type.HELMET));
+    public static final RegistryObject<Item> PORTAL_FLUX_CHESTPLATE = ITEMS.register("portal_flux_chestplate",
+            () -> new PortalFluxArmorItem(ArmorItem.Type.CHESTPLATE));
+    public static final RegistryObject<Item> PORTAL_FLUX_LEGGINGS = ITEMS.register("portal_flux_leggings",
+            () -> new PortalFluxArmorItem(ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<Item> PORTAL_FLUX_BOOTS = ITEMS.register("portal_flux_boots",
+            () -> new PortalFluxArmorItem(ArmorItem.Type.BOOTS));
 
     // Display-only 3D portal models for the recipe book
     public static final RegistryObject<Item> PORTAL_PREVIEW_COAL = ITEMS.register("portal_preview_coal", () -> new Item(new Item.Properties()));

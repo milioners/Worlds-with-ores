@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NKN",
+    "KUK",
+    "NKN"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "K": {
+      "item": "worlds_with_ores:flux_core"
+    },
+    "U": {
+      "item": "worlds_with_ores:flux_coil_upgrade_quantum"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_coil_upgrade_singularity"
+  }
+}

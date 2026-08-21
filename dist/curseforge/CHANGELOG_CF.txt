@@ -1,7 +1,7 @@
-﻿1.3.0-1.20.1
+﻿1.4.0-1.20.1
 
-- Industrial dimensions: weighted multi-ore soft fill (all ores per mod, primary-dominant)
-- Requires-mod tooltips on industrial portal igniters
-- Portal Flux: 8 module slots (Heat Cap / Overclock / Transfer / Safeguard) + port transfer FE/t display
-- Portal Chest: Flux-styled GUI, Sort + Deposit matching, comparator signal
-- Book / lang EN+RU updates for multi-ore terrain and Extreme Reactors wording
+- Flux Cable network (FE pull/push between machines)
+- Wireless TX/RX + Flux Linker (same dimension, max 48 blocks)
+- Coil tiers T4 Singularity (1280 FE/t) and T5 Nexus (2560 FE/t)
+- Full FE tool set (axe/shovel/hoe/sword) + Flux armor with abilities
+- Removed WIP badges from core Portal Flux items/GUI

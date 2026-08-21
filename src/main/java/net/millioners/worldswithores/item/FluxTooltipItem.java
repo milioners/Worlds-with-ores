@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-/** Item with WIP energy badge and optional usage hint. */
+/** Flux item with optional usage hint (no WIP badge). */
 public class FluxTooltipItem extends Item {
     private final String hintKey;
 
@@ -21,7 +21,6 @@ public class FluxTooltipItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.worlds_with_ores.energy_wip").withStyle(ChatFormatting.GOLD));
         if (this.hintKey != null && !this.hintKey.isEmpty()) {
             tooltip.add(Component.translatable(this.hintKey).withStyle(ChatFormatting.GRAY));
         }

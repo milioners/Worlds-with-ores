@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-/** Block item marked as Portal Flux work-in-progress. */
+/** Flux block item with optional usage hint (no WIP badge). */
 public class FluxTooltipBlockItem extends BlockItem {
     private final String hintKey;
 
@@ -22,7 +22,6 @@ public class FluxTooltipBlockItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.worlds_with_ores.energy_wip").withStyle(ChatFormatting.GOLD));
         if (this.hintKey != null && !this.hintKey.isEmpty()) {
             tooltip.add(Component.translatable(this.hintKey).withStyle(ChatFormatting.GRAY));
         }

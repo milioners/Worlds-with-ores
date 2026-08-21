@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "CKC",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "K": {
+      "item": "worlds_with_ores:flux_core"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:flux_linker"
+  }
+}

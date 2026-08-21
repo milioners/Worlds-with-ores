@@ -3,9 +3,11 @@ package net.millioners.worldswithores.registry;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.millioners.worldswithores.WorldsWithOresMod;
 import net.millioners.worldswithores.blockentity.FluxBatteryBlockEntity;
+import net.millioners.worldswithores.blockentity.FluxCableBlockEntity;
 import net.millioners.worldswithores.blockentity.FluxChargerBlockEntity;
 import net.millioners.worldswithores.blockentity.FluxControllerBlockEntity;
 import net.millioners.worldswithores.blockentity.FluxEnergyPortBlockEntity;
+import net.millioners.worldswithores.blockentity.FluxWirelessBlockEntity;
 import net.millioners.worldswithores.blockentity.ModChestBlockEntity;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,4 +36,14 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<FluxChargerBlockEntity>> FLUX_CHARGER =
             BLOCK_ENTITIES.register("flux_charger",
                     () -> BlockEntityType.Builder.of(FluxChargerBlockEntity::new, ModBlocks.FLUX_CHARGER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FluxCableBlockEntity>> FLUX_CABLE =
+            BLOCK_ENTITIES.register("flux_cable",
+                    () -> BlockEntityType.Builder.of(FluxCableBlockEntity::new, ModBlocks.FLUX_CABLE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FluxWirelessBlockEntity>> FLUX_WIRELESS =
+            BLOCK_ENTITIES.register("flux_wireless",
+                    () -> BlockEntityType.Builder.of(FluxWirelessBlockEntity::new,
+                            ModBlocks.FLUX_WIRELESS_TRANSMITTER.get(),
+                            ModBlocks.FLUX_WIRELESS_RECEIVER.get()).build(null));
 }

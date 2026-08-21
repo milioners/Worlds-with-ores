@@ -20,7 +20,14 @@ public enum ModArmorMaterials implements ArmorMaterial {
         map.put(ArmorItem.Type.CHESTPLATE, 10);
         map.put(ArmorItem.Type.HELMET, 5);
     }), 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 3.4F, 0.0F,
-            () -> Ingredient.of(ModBlocks.NETHERBRICKLAVAOBSIDIAN.get()));
+            () -> Ingredient.of(ModBlocks.NETHERBRICKLAVAOBSIDIAN.get())),
+    PORTAL_FLUX("portal_flux", 40, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 4);
+        map.put(ArmorItem.Type.LEGGINGS, 7);
+        map.put(ArmorItem.Type.CHESTPLATE, 9);
+        map.put(ArmorItem.Type.HELMET, 4);
+    }), 22, SoundEvents.ARMOR_EQUIP_NETHERITE, 2.5F, 0.05F,
+            () -> Ingredient.of(ModBlocks.FLUX_CASING.get()));
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 13);

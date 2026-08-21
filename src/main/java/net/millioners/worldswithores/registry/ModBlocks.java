@@ -10,12 +10,14 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.millioners.worldswithores.WorldsWithOresMod;
 import net.millioners.worldswithores.block.FluxBatteryBlock;
+import net.millioners.worldswithores.block.FluxCableBlock;
 import net.millioners.worldswithores.block.FluxCasingBlock;
 import net.millioners.worldswithores.block.FluxChargerBlock;
 import net.millioners.worldswithores.block.FluxCoilBlock;
 import net.millioners.worldswithores.block.FluxControllerBlock;
 import net.millioners.worldswithores.block.FluxEnergyPortBlock;
 import net.millioners.worldswithores.block.FluxGlassBlock;
+import net.millioners.worldswithores.block.FluxWirelessBlock;
 import net.millioners.worldswithores.block.ModChestBlock;
 import net.millioners.worldswithores.block.ModPortalBlock;
 import net.millioners.worldswithores.util.SoftFrames;
@@ -117,4 +119,10 @@ public class ModBlocks {
             BLOCKS.register("flux_battery", FluxBatteryBlock::new);
     public static final RegistryObject<FluxChargerBlock> FLUX_CHARGER =
             BLOCKS.register("flux_charger", FluxChargerBlock::new);
+    public static final RegistryObject<FluxCableBlock> FLUX_CABLE =
+            BLOCKS.register("flux_cable", FluxCableBlock::new);
+    public static final RegistryObject<FluxWirelessBlock> FLUX_WIRELESS_TRANSMITTER =
+            BLOCKS.register("flux_wireless_transmitter", () -> new FluxWirelessBlock(true));
+    public static final RegistryObject<FluxWirelessBlock> FLUX_WIRELESS_RECEIVER =
+            BLOCKS.register("flux_wireless_receiver", () -> new FluxWirelessBlock(false));
 }

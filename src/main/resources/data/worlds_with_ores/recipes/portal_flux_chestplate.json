@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "CKC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "worlds_with_ores:flux_casing"
+    },
+    "K": {
+      "item": "worlds_with_ores:flux_core"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:portal_flux_chestplate"
+  }
+}

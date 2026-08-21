@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "C C"
+  ],
+  "key": {
+    "C": {
+      "item": "worlds_with_ores:flux_casing"
+    }
+  },
+  "result": {
+    "item": "worlds_with_ores:portal_flux_helmet"
+  }
+}

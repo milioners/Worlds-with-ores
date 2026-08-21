@@ -10,9 +10,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.SlotItemHandler;
 import net.millioners.worldswithores.blockentity.FluxChargerBlockEntity;
-import net.millioners.worldswithores.item.PortalFluxPickaxeItem;
 import net.millioners.worldswithores.registry.ModBlocks;
 import net.millioners.worldswithores.registry.ModMenus;
 
@@ -33,8 +33,7 @@ public class FluxChargerMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(this.charger.getChargeSlot(), 0, 80, 40) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getCapability(ForgeCapabilities.ENERGY).isPresent()
-                        || stack.getItem() instanceof PortalFluxPickaxeItem;
+                return stack.getCapability(ForgeCapabilities.ENERGY).map(IEnergyStorage::canReceive).orElse(false);
             }
         });
 

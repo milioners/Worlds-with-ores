@@ -82,8 +82,7 @@ public final class FluxMultiblock {
     }
 
     public static boolean isCoilUpgrade(ItemStack stack) {
-        return stack.is(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get())
-                || stack.is(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get());
+        return stack.getItem() instanceof net.millioners.worldswithores.item.FluxCoilUpgradeItem;
     }
 
     public static boolean openController(Level level, BlockPos partPos, Player player) {
@@ -109,10 +108,6 @@ public final class FluxMultiblock {
         FluxCoilTier required = null;
         if (upgrade.getItem() instanceof net.millioners.worldswithores.item.FluxCoilUpgradeItem upgradeItem) {
             required = upgradeItem.fromTier();
-        } else if (upgrade.is(ModItems.FLUX_COIL_UPGRADE_ADVANCED.get())) {
-            required = FluxCoilTier.BASIC;
-        } else if (upgrade.is(ModItems.FLUX_COIL_UPGRADE_QUANTUM.get())) {
-            required = FluxCoilTier.ADVANCED;
         }
         if (required == null || upgrade.isEmpty()) {
             player.displayClientMessage(Component.translatable("message.worlds_with_ores.coil.need_upgrade_item"), true);
